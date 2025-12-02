@@ -2,9 +2,9 @@ using System.Diagnostics.Contracts;
 
 namespace RPG
 {
-
     public static class MonsterFactory
     {
+        //World 1 Monster
         public static Monster Keiler()
         {
             return new Monster(
@@ -34,7 +34,80 @@ namespace RPG
                  MonsterDropsLibrary.MonsterDrops["MadScientist"]
                  );
         }
+
+        public static Monster LanzenRitter()
+        {
+            return new Monster(
+                "Ritter der aufgehenden Sonne",
+                5, 15, 15, 40,
+                new List<string> {"Zornhieb", "Verwüster"},
+                MonsterDropsLibrary.MonsterDrops["LanzenRitter"]
+            );
+        }       
+
+        public static Monster Waldkobold()
+        {
+            return new Monster(
+                "Waldkobold",
+                3, 8, 10, 35,
+                new List<string> { "Klauenwirbel", "Nebelgriff" },
+                MonsterDropsLibrary.MonsterDrops["Waldkobold"]
+            );
+        }
+
+        public static Monster Steinkaefer()
+        {
+            return new Monster(
+                "Steinkäfer",
+                5, 5, 20, 40,
+                new List<string> { "Splitterfaust", "Erdspalter" },
+                MonsterDropsLibrary.MonsterDrops["Steinkaefer"]
+            );
+        }
+
+        public static Monster Dorfschlaeger()
+        {
+            return new Monster(
+                "Dorfschläger",
+                4, 9, 12, 30,
+                new List<string> { "Magenbrecher", "Knochenhieb" },
+                MonsterDropsLibrary.MonsterDrops["Dorfschlaeger"]
+            );
+        }
+
+        public static Monster Schleimling()
+        {
+            return new Monster(
+                "Schleimling",
+                2, 6, 12, 25,
+                new List<string> { "Giftwolke", "Seuchenbiss" },
+                MonsterDropsLibrary.MonsterDrops["Schleimling"]
+            );
+        }
+
+        public static Monster Kraehenschwarm()
+        {
+            return new Monster(
+                "Krähenschwarm",
+                3, 7, 8, 30,
+                new List<string> { "Schallkreischer", "Schattenstoß" },
+                MonsterDropsLibrary.MonsterDrops["Kraehenschwarm"]
+            );
+        }
+
+        public static Monster Waldgeist()
+        {
+            return new Monster(
+                "Waldgeist",
+                3, 6, 10, 32,
+                new List<string> { "Geisterklinge", "Nebelgriff" },
+                MonsterDropsLibrary.MonsterDrops["Waldgeist"]
+            );
+        }
+
+        //World 2 Monster
     }
+
     public static class MonsterAttackLibrary
     {
         public static Dictionary<string, AttackMonster> MonsterAttacks = new()
@@ -84,9 +157,24 @@ namespace RPG
     {
         public static Dictionary<string, MonsterDrop> MonsterDrops = new()
         {
+            // World 1 Drops 
+
             {"Keiler", new MonsterDrop(50, "Hauer des Keilers", 100 )},
             {"UntoterRitter", new MonsterDrop(150, "Amulett der Untoten", 20)},
-            {"MadScientist", new MonsterDrop(80, "Phiole des ewigen Lebens", 15)}
+            {"MadScientist", new MonsterDrop(80, "Phiole des ewigen Lebens", 15)},
+            {"LanzenRitter", new MonsterDrop(80, "Talisman des Ritterordens", 15)},
+            {"Waldkobold", new MonsterDrop(40, "Splitter der Koboldmaske", 25)},
+            {"Steinkaefer", new MonsterDrop(50, "Panzerfragment des Steinkäfers", 20)},
+            {"Dorfschlaeger", new MonsterDrop(30, "Abgenutzter Knüppel", 40)},
+            {"Schleimling", new MonsterDrop(25, "Glitschige Essenz", 35)},
+            {"Kraehenschwarm", new MonsterDrop(35, "Rabenschwinge", 30)},
+            {"Waldgeist", new MonsterDrop(45, "Flüstern der Bäume", 22)}
+
+            // World 2 Drops
+
+            // World 3 Drops
+
+            // Bossdrops
         };
     }
 }

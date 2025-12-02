@@ -10,6 +10,7 @@ namespace RPG
         {
             RoomName = roomname;
             Description = description;
+            
         }
     }
 
@@ -38,13 +39,18 @@ namespace RPG
         {
             ShopInv = inv ?? new Inventory(new List<string>());
 
-
-
         }
-
     }
 
-    // campfire klasse
+    public class Campfire : Room
+    {
+        public List<string> Encounter {get; set;}
+
+        public Campfire(string roomname,string description, List<string> encounter) : base(roomname,description)
+        {
+            Encounter = encounter ?? new List<string>();
+        }
+    }   
 
     // Boss Klasse
 
