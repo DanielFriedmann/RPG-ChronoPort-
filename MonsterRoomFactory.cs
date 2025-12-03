@@ -6,7 +6,7 @@ namespace RPG
         {
             return new MonsterRoom(MonsterFactory.Keiler(), "Welt1", 
             "Du findest dich wieder in einem Keller der etwas verwuchert ist.",
-            "Du hörst ein lautes Trampeln", 
+            "Du hörst ein lautes Trampeln",
             "Ein wildes Geräusch ertönt hinter dir, du drehst dich um!");
         }
 
@@ -80,6 +80,14 @@ namespace RPG
         }
 
           public static MonsterRoom A10()
+        {
+            return new MonsterRoom(MonsterFactory.LanzenRitter(), "Welt1",
+            "Du stehst in einer belebten Arena, die Stimmung ist aufgeheizt und die Leute schreien.",
+            "Du hörst ein immer lauter werdendes Gallopieren.",
+            "Plötzlich siehst du ein Ritter mit einer Lanze auf dich zu kommen!");
+        }
+
+          public static MonsterRoom A11()
         {
             return new MonsterRoom(MonsterFactory.LanzenRitter(), "Welt1",
             "Du stehst in einer belebten Arena, die Stimmung ist aufgeheizt und die Leute schreien.",

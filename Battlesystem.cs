@@ -1,0 +1,210 @@
+namespace RPG
+{
+    public static class BattleSystem
+    {
+        public static void Kampf(BasePlayer player, Monster monster)
+        {
+            Console.WriteLine($"Kampf gestartet: {player.Name} VS {monster.Name}");
+
+            while (player.Health > 0 && monster.Health > 0)
+            {
+                PlayerTurn(player, monster);
+
+                if (monster.Health <= 0)
+                    break;
+
+                MonsterTurn(player, monster);
+            }
+
+            if (player.Health > 0)
+            {
+                Console.WriteLine($"Du hast  {monster.Name} besiegt!");
+                Console.WriteLine($"Du erhältst {monster.Drop.DropXP} Erfahrung und {monster.Drop.Gold} Gold.");
+                player.Xp += monster.Drop.DropXP;
+                player.Money += monster.Drop.Gold;
+                Console.WriteLine($"Du hast jetzt {player.Xp} XP und {player.Money} Gold");
+
+                if (LootChance(monster.Drop))
+                {
+                    Console.WriteLine($"{monster.Name} hat Loot gedroppt!");
+                    Console.WriteLine($"Du erhältst {monster.Drop.DropItem}!");
+                }
+
+                Level.LvlUpCheck(player);
+
+            }
+
+            else
+                Console.WriteLine("Spieler wurde besiegt..."); // GameOver
+        }
+
+        public static void MonsterTurn(BasePlayer player, Monster monster)
+        {
+            AttackMonster monsterAttack = AttackRandomizer(monster);
+            Console.WriteLine($"{monster.Name} greift mit {monsterAttack.AttackName} an.");
+
+            if (DoesHit(monsterAttack.AttackAccuracy))
+            {
+                int damage = 0;
+
+                if (player.Status == "block")
+                {
+                    damage = monsterAttack.AttackDamage - (player.Defense * 2);
+                    player.Status = "normal";
+                }
+
+                else
+                {
+                    damage = monsterAttack.AttackDamage - player.Defense;
+                }
+
+
+                if (damage > 0)
+                {
+                    player.Health -= damage;
+                    Console.WriteLine($"Du hast {damage} Schaden erlitten. HP: {player.Health}");
+                }
+                else
+                {
+                    Console.WriteLine("Der Schaden wurde komplett von der Rüstung negiert!");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine($"Das Monster hat {monsterAttack.AttackName} verfehlt!");
+            }
+        }
+
+        public static void PlayerTurn(BasePlayer player, Monster monster)
+        {
+            string special = "Spezialangriff";
+            if (player.HeroAbility != "")
+            {
+                special = player.HeroAbility;
+            }
+            Console.WriteLine($"\n1.Angriff\t\t2.{special}");
+            Console.WriteLine("3.Blocken\t\t4.Inventar öffnen");
+
+            int userchoice = InputHelper.GetInt("Wähle eine Aktion aus:", 4);
+
+            switch (userchoice)
+            {
+                case 1:
+                    NormalAttack(player, monster);
+                    break;
+
+                case 2:
+                    if (player.HeroAbility != "")
+                    {
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Du hast noch keine Special Ability! Statdessen normaler Angriff.");
+                        NormalAttack(player, monster);
+                    }
+                    break;
+
+                case 3:
+                    PlayerBlock(player);
+                    break;
+
+                case 4:
+                    break;
+
+            }
+        }
+
+        public static void CheckStatusPlayer(BasePlayer player)
+        {
+
+        }
+
+        public static void CheckStatusMonster(BasePlayer player)
+        {
+
+        }
+
+        public static void PlayerBlock(BasePlayer player)
+        {
+            Console.WriteLine("Du bist auf den nächsten Angriff gefasst und versuchst zu blocken.");
+            player.Status = "block";
+        }
+        public static void NormalAttack(BasePlayer player, Monster monster)
+        {
+            Console.WriteLine($"{player.Name} greift {monster.Name} an!");
+
+            if (DoesCrit(player.Crit))
+            {
+                int damage = (player.Attack - monster.Defense) * 2;
+                monster.Health -= damage;
+                Console.WriteLine($"Kritischer Treffer! Du machst {damage} Schaden! {monster.Name} HP: {monster.Health}");
+            }
+
+            else
+            {
+                int damage = player.Attack - monster.Defense;
+                monster.Health -= damage;
+                Console.WriteLine($"Du machst {monster.Name} {damage} Schaden! {monster.Name} HP: {monster.Health}");
+            }
+        }
+
+        public static bool LootChance(MonsterDrop drop)
+        {
+            Random random = new Random();
+            int hit = random.Next(0, 101);
+
+            if (drop.DropChance >= hit)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+
+        }
+        public static bool DoesCrit(int crit)
+        {
+            Random random = new Random();
+            int hit = random.Next(0, 101);
+
+            if (hit > crit)
+            {
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+        }
+
+        public static bool DoesHit(int acc)
+        {
+            Random random = new Random();
+            int hit = random.Next(0, 101);
+
+            if (hit >= acc)
+            {
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+        }
+
+        public static AttackMonster AttackRandomizer(Monster monster)
+        {
+            Random random = new Random();
+            int index = random.Next(0, monster.AttackNames.Count);
+            string attackName = monster.AttackNames[index];
+
+            return MonsterAttackLibrary.MonsterAttacks[attackName];
+        }
+    }
+}

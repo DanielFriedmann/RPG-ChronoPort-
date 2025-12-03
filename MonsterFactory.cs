@@ -9,7 +9,7 @@ namespace RPG
         {
             return new Monster(
                 "Keiler des Totwaldes",
-                 4, 10, 15, 50,
+                 4, 10, 15, 40,
                  new List<string> { "Raserei", "Sturmangriff" },
                  MonsterDropsLibrary.MonsterDrops["Keiler"]
                  );
@@ -19,7 +19,7 @@ namespace RPG
         {
             return new Monster(
                 "Untoter Ritter der Tafel",
-                 4, 10, 15, 55,
+                 4, 10, 15, 40,
                  new List<string> { "Dolchstoß", "Sturmangriff" },
                  MonsterDropsLibrary.MonsterDrops["UntoterRitter"]
                  );
@@ -29,7 +29,7 @@ namespace RPG
         {
             return new Monster(
                 "Verrückter Wissenschaftler",
-                 4, 10, 15, 55,
+                 4, 10, 15, 40,
                  new List<string> { "Feueratem", "Giftbiss" },
                  MonsterDropsLibrary.MonsterDrops["MadScientist"]
                  );
@@ -159,16 +159,16 @@ namespace RPG
         {
             // World 1 Drops 
 
-            {"Keiler", new MonsterDrop(50, "Hauer des Keilers", 100 )},
-            {"UntoterRitter", new MonsterDrop(150, "Amulett der Untoten", 20)},
-            {"MadScientist", new MonsterDrop(80, "Phiole des ewigen Lebens", 15)},
-            {"LanzenRitter", new MonsterDrop(80, "Talisman des Ritterordens", 15)},
-            {"Waldkobold", new MonsterDrop(40, "Splitter der Koboldmaske", 25)},
-            {"Steinkaefer", new MonsterDrop(50, "Panzerfragment des Steinkäfers", 20)},
-            {"Dorfschlaeger", new MonsterDrop(30, "Abgenutzter Knüppel", 40)},
-            {"Schleimling", new MonsterDrop(25, "Glitschige Essenz", 35)},
-            {"Kraehenschwarm", new MonsterDrop(35, "Rabenschwinge", 30)},
-            {"Waldgeist", new MonsterDrop(45, "Flüstern der Bäume", 22)}
+            {"Keiler", new MonsterDrop(50, "Hauer des Keilers", 100, 10 )},
+            {"UntoterRitter", new MonsterDrop(150, "Amulett der Untoten", 20, 15)},
+            {"MadScientist", new MonsterDrop(80, "Phiole des ewigen Lebens", 15, 12)},
+            {"LanzenRitter", new MonsterDrop(80, "Talisman des Ritterordens", 15, 15)},
+            {"Waldkobold", new MonsterDrop(40, "Splitter der Koboldmaske", 25, 17)},
+            {"Steinkaefer", new MonsterDrop(50, "Panzerfragment des Steinkäfers", 20, 14)},
+            {"Dorfschlaeger", new MonsterDrop(30, "Abgenutzter Knüppel", 40, 12)},
+            {"Schleimling", new MonsterDrop(25, "Glitschige Essenz", 35, 8)},
+            {"Kraehenschwarm", new MonsterDrop(35, "Rabenschwinge", 30, 7)},
+            {"Waldgeist", new MonsterDrop(45, "Flüstern der Bäume", 22, 6)}
 
             // World 2 Drops
 

@@ -46,12 +46,33 @@ namespace RPG
 
         public int DropChance { get; set; }
 
-        public MonsterDrop(int xp, string item, int chance)
+        public int Gold { get; set; }
+
+        public MonsterDrop(int xp, string item, int chance, int gold)
         {
             DropXP = xp;
             DropItem = item;
             DropChance = chance;
+            Gold = gold;
         }
+
+    }
+
+    public class Items
+    {
+        public string Name { get; set; }
+
+        public int ID { get; set; }
+
+        public int Value { get; set; }
+
+        public Items(string name, int id, int value)
+        {
+            Name = name;
+            ID = id;
+            Value = value;
+        }
+
 
     }
 
@@ -78,13 +99,34 @@ namespace RPG
 
         public int SpecialPoints { get; set; }
 
+        public int Xp { get; set; }
+
+        public int MaxHP { get; set; }
+
+        public int MaxSP { get; set; }
+
+        public string HeroAbility { get; set; }
+
+        public string Status { get; set; }
+
+        public int Money { get; set; }
+
         public Inventory Inventory { get; set; }
 
-        public BasePlayer(string name, int level, int attack, int defense, int health, int crit, int special, Inventory inv) : base(name, level, attack, defense, health)
+        public BasePlayer(string name, int level, int xp, int maxhp, int attack, int defense,
+                             int health, int crit, int special, int maxsp,
+                              Inventory inv,  string heroability, int money = 0, string status = "normal") 
+                             : base(name, level, attack, defense, health)
         {
+            Xp = xp;
+            MaxHP = maxhp;
             Crit = crit;
             SpecialPoints = special;
+            MaxSP = maxsp;
             Inventory = inv;
+            Money = money;
+            HeroAbility = heroability;
+            Status = status;
         }
     }
 
@@ -96,5 +138,25 @@ namespace RPG
         {
             ItemsInventory = items;
         }
+    }
+
+    public class PlayerSpAtt
+    {
+        public string Name { get; set; }
+
+        public int Damage { get; set; }
+        
+        public int Crit { get; set; }
+
+        public string Status {get; set; }
+
+        public PlayerSpAtt(string name, int damage, int crit, string status = "")
+        {
+            Name = name;
+            Damage = damage;
+            Crit = crit;
+            Status = status;
+        }
+
     }
 }

@@ -33,14 +33,16 @@ namespace RPG
 
     public class Shop : Room
     {
-        public Inventory? ShopInv { get; set; }
+        public List<string> ShopInv { get; set; }
 
-        public Shop(string roomname, string description, Inventory? inv) : base(roomname, description)
+        
+        public Shop(string roomname, string description, List<string> inv) : base(roomname, description)
         {
-            ShopInv = inv ?? new Inventory(new List<string>());
-
+            ShopInv = inv;
         }
     }
+
+    
 
     public class Campfire : Room
     {

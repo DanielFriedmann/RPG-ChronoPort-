@@ -12,3 +12,4 @@ C:\Users\FriedmannDaniel\CsharpProjects\Projekt RPG\RPG\obj\Debug\net10.0\refint
 C:\Users\FriedmannDaniel\CsharpProjects\Projekt RPG\RPG\obj\Debug\net10.0\RPG.pdb
 C:\Users\FriedmannDaniel\CsharpProjects\Projekt RPG\RPG\obj\Debug\net10.0\RPG.genruntimeconfig.cache
 C:\Users\FriedmannDaniel\CsharpProjects\Projekt RPG\RPG\obj\Debug\net10.0\ref\RPG.dll
+C:\Users\FriedmannDaniel\CsharpProjects\Projekt RPG\RPG\obj\Debug\net10.0\RPG.sourcelink.json
