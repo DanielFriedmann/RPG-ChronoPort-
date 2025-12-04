@@ -12,6 +12,7 @@
         {
             BasePlayer held = HeroFactory.CreatePlayer();
             DungeonGenerator.GenerateDungeonW1(held);
+            DungeonGenerator2.GenerateDungeonW2(held);
             //Encounter(held);
 
 

@@ -116,94 +116,23 @@ namespace RPG
     }
     public static class MonsterFactory
     {
-        //World 1 Monster
-        public static Monster Keiler()
+        public static Monster Feuerkobold()
         {
             return new Monster(
-                "Keiler des Totwaldes",
-                 4, 10, 15, 40,
-                 new List<string> { "Raserei", "Sturmangriff" },
-                 MonsterDropsLibrary.MonsterDrops["Keiler"]
-                 );
-        }
-
-        public static Monster UntoterRitter()
-        {
-            return new Monster(
-                "Untoter Ritter der Tafel",
-                 4, 10, 15, 40,
-                 new List<string> { "Dolchstoß", "Sturmangriff" },
-                 MonsterDropsLibrary.MonsterDrops["UntoterRitter"]
-                 );
-        }
-
-        public static Monster MadScientist()
-        {
-            return new Monster(
-                "Verrückter Wissenschaftler",
-                 4, 10, 15, 40,
-                 new List<string> { "Feueratem", "Giftbiss" },
-                 MonsterDropsLibrary.MonsterDrops["MadScientist"]
-                 );
-        }
-
-        public static Monster LanzenRitter()
-        {
-            return new Monster(
-                "Ritter der aufgehenden Sonne",
-                5, 15, 15, 40,
-                new List<string> { "Zornhieb", "Verwüster" },
-                MonsterDropsLibrary.MonsterDrops["LanzenRitter"]
+                "Feuerkobold",
+                4, 8, 12, 28,
+                new List<string> { "Feueratem", "Flammenhieb" },
+                MonsterDropsLibrary.MonsterDrops["Feuerkobold"]
             );
         }
 
-        public static Monster Waldkobold()
+        public static Monster Nanoinsekt()
         {
             return new Monster(
-                "Waldkobold",
-                3, 8, 10, 35,
-                new List<string> { "Klauenwirbel", "Nebelgriff" },
-                MonsterDropsLibrary.MonsterDrops["Waldkobold"]
-            );
-        }
-
-        public static Monster Steinkaefer()
-        {
-            return new Monster(
-                "Steinkäfer",
-                5, 5, 20, 40,
-                new List<string> { "Splitterfaust", "Erdspalter" },
-                MonsterDropsLibrary.MonsterDrops["Steinkaefer"]
-            );
-        }
-
-        public static Monster Dorfschlaeger()
-        {
-            return new Monster(
-                "Dorfschläger",
-                4, 9, 12, 30,
-                new List<string> { "Magenbrecher", "Knochenhieb" },
-                MonsterDropsLibrary.MonsterDrops["Dorfschlaeger"]
-            );
-        }
-
-        public static Monster Schleimling()
-        {
-            return new Monster(
-                "Schleimling",
-                2, 6, 12, 25,
-                new List<string> { "Giftwolke", "Seuchenbiss" },
-                MonsterDropsLibrary.MonsterDrops["Schleimling"]
-            );
-        }
-
-        public static Monster Kraehenschwarm()
-        {
-            return new Monster(
-                "Krähenschwarm",
-                3, 7, 8, 30,
-                new List<string> { "Schallkreischer", "Schattenstoß" },
-                MonsterDropsLibrary.MonsterDrops["Kraehenschwarm"]
+                "Nanoinsekt",
+                3, 6, 10, 28,
+                new List<string> { "Giftbiss", "Nanopeitsche" },
+                MonsterDropsLibrary.MonsterDrops["Nanoinsekt"]
             );
         }
 
@@ -217,51 +146,350 @@ namespace RPG
             );
         }
 
-        //World 2 Monster
+        public static Monster Schattenkatze()
+        {
+            return new Monster(
+                "Schattenkatze",
+                4, 8, 10, 35,
+                new List<string> { "Schattenstoß", "Schattensprung" },
+                MonsterDropsLibrary.MonsterDrops["Schattenkatze"]
+            );
+        }
+
+        public static Monster Plasmaelementar()
+        {
+            return new Monster(
+                "Plasmaelementar",
+                6, 12, 10, 44,
+                new List<string> { "Sternenfeuer", "Feuerexplosion" },
+                MonsterDropsLibrary.MonsterDrops["Plasmaelementar"]
+            );
+        }
+
+        public static Monster Höhlenlöwe()
+        {
+            return new Monster(
+                "Höhlenlöwe",
+                4, 8, 10, 36,
+                new List<string> { "Zornhieb", "Klauenwirbel" },
+                MonsterDropsLibrary.MonsterDrops["Höhlenlöwe"]
+            );
+        }
+
+        public static Monster Riesenhummel()
+        {
+            return new Monster(
+                "Riesenhummel",
+                3, 6, 12, 28,
+                new List<string> { "Giftbiss", "Stachelstich" },
+                MonsterDropsLibrary.MonsterDrops["Riesenhummel"]
+            );
+        }
+
+        public static Monster Cyberwolf()
+        {
+            return new Monster(
+                "Cyberwolf",
+                5, 10, 9, 36,
+                new List<string> { "Griff der Ätherwölfe", "Biss" },
+                MonsterDropsLibrary.MonsterDrops["Cyberwolf"]
+            );
+        }
+
+        public static Monster Eisdämon()
+        {
+            return new Monster(
+                "Eisdämon",
+                5, 10, 12, 40,
+                new List<string> { "Frostlanze", "Kryostachel" },
+                MonsterDropsLibrary.MonsterDrops["Eisdämon"]
+            );
+        }
+
+        public static Monster Mammut()
+        {
+            return new Monster(
+                "Mammut",
+                5, 10, 8, 40,
+                new List<string> { "Raserei", "Sturmangriff" },
+                MonsterDropsLibrary.MonsterDrops["Mammut"]
+            );
+        }
+
+        public static Monster Urvogel()
+        {
+            return new Monster(
+                "Urvogel",
+                4, 8, 10, 36,
+                new List<string> { "Sturmangriff", "Flügelstoß" },
+                MonsterDropsLibrary.MonsterDrops["Urvogel"]
+            );
+        }
+
+        public static Monster Zeitdrache()
+        {
+            return new Monster(
+                "Zeitdrache",
+                7, 14, 12, 50,
+                new List<string> { "Zeitschlag", "Zeitenbiss" },
+                MonsterDropsLibrary.MonsterDrops["Zeitdrache"]
+            );
+        }
+
+        public static Monster Drohnenwächter()
+        {
+            return new Monster(
+                "Drohnenwächter",
+                5, 10, 8, 38,
+                new List<string> { "Photonstrahl", "Nanopeitsche" },
+                MonsterDropsLibrary.MonsterDrops["Drohnenwächter"]
+            );
+        }
+
+        public static Monster Berserkerkrokodil()
+        {
+            return new Monster(
+                "Berserkerkrokodil",
+                6, 12, 10, 42,
+                new List<string> { "Berserkeransturm", "Magenbrecher" },
+                MonsterDropsLibrary.MonsterDrops["Berserkerkrokodil"]
+            );
+        }
+
+        public static Monster Walddryade()
+        {
+            return new Monster(
+                "Walddryade",
+                3, 6, 10, 30,
+                new List<string> { "Wurzelgriff", "Magisches Zischen" },
+                MonsterDropsLibrary.MonsterDrops["Walddryade"]
+            );
+        }
+
+        public static Monster Schockdrone()
+        {
+            return new Monster(
+                "Schockdrone",
+                3, 6, 12, 30,
+                new List<string> { "Gravitationsstoß", "Kettenblitz" },
+                MonsterDropsLibrary.MonsterDrops["Schockdrone"]
+            );
+        }
+
+        public static Monster Riesenhandkrabbe()
+        {
+            return new Monster(
+                "Riesenhandkrabbe",
+                5, 10, 12, 36,
+                new List<string> { "Schockscheren", "Kettenblitz" },
+                MonsterDropsLibrary.MonsterDrops["Riesenhandkrabbe"]
+            );
+        }
+
+        public static Monster Feuersprite()
+        {
+            return new Monster(
+                "Feuersprite",
+                4, 8, 12, 32,
+                new List<string> { "Flammenhieb", "Feuerexplosion" },
+                MonsterDropsLibrary.MonsterDrops["Feuersprite"]
+            );
+        }
+
+        public static Monster Steingolem()
+        {
+            return new Monster(
+                "Steingolem",
+                6, 12, 8, 45,
+                new List<string> { "Erdspalter", "Steinschmetter" },
+                MonsterDropsLibrary.MonsterDrops["Steingolem"]
+            );
+        }
+
+        public static Monster Cyberkrabbe()
+        {
+            return new Monster(
+                "Cyberkrabbe",
+                5, 10, 12, 36,
+                new List<string> { "Schockscheren", "Kettenblitz" },
+                MonsterDropsLibrary.MonsterDrops["Cyberkrabbe"]
+            );
+        }
+
+        public static Monster Phönixjunges()
+        {
+            return new Monster(
+                "Phönixjunges",
+                6, 12, 10, 40,
+                new List<string> { "Feuerexplosion", "Flammenhieb" },
+                MonsterDropsLibrary.MonsterDrops["Phönixjunges"]
+            );
+        }
+
+        public static Monster Gnommechaniker()
+        {
+            return new Monster(
+                "Gnommechaniker",
+                3, 6, 12, 28,
+                new List<string> { "Kettenblitz", "Nanopeitsche" },
+                MonsterDropsLibrary.MonsterDrops["Gnommechaniker"]
+            );
+        }
+
+        public static Monster Kristalldrache()
+        {
+            return new Monster(
+                "Kristalldrache",
+                7, 14, 12, 48,
+                new List<string> { "Arkaneruption", "Sternenfeuer" },
+                MonsterDropsLibrary.MonsterDrops["Kristalldrache"]
+            );
+        }
+
+        public static Monster Eisnymphe()
+        {
+            return new Monster(
+                "Eisnymphe",
+                5, 10, 12, 36,
+                new List<string> { "Frostlanze", "Kryostachel" },
+                MonsterDropsLibrary.MonsterDrops["Eisnymphe"]
+            );
+        }
+
+        public static Monster Trollkrieger()
+        {
+            return new Monster(
+                "Trollkrieger",
+                6, 12, 14, 44,
+                new List<string> { "Zornhieb", "Erdspalter" },
+                MonsterDropsLibrary.MonsterDrops["Trollkrieger"]
+            );
+        }
+
+        public static Monster Schattenkobold()
+        {
+            return new Monster(
+                "Schattenkobold",
+                4, 8, 10, 30,
+                new List<string> { "Schattenstoß", "Schattensprung" },
+                MonsterDropsLibrary.MonsterDrops["Schattenkobold"]
+            );
+        }
+
+        public static Monster Wassergeist()
+        {
+            return new Monster(
+                "Wassergeist",
+                5, 10, 12, 36,
+                new List<string> { "Seelenbrand", "Astralschlag" },
+                MonsterDropsLibrary.MonsterDrops["Wassergeist"]
+            );
+        }
+
+        public static Monster Drohnenjäger()
+        {
+            return new Monster(
+                "Drohnenjäger",
+                4, 8, 10, 34,
+                new List<string> { "Photonstrahl", "Laserpeitsche" },
+                MonsterDropsLibrary.MonsterDrops["Drohnenjäger"]
+            );
+        }
+        public static Monster Lavakriecher()
+        {
+            return new Monster(
+                "Lavakriecher",
+                6, 12, 10, 42,
+                new List<string> { "Glutwelle", "Blitzkette" },
+                MonsterDropsLibrary.MonsterDrops["Lavakriecher"]
+            );
+        }
+
+        public static Monster Schattenwurm()
+        {
+            return new Monster(
+                "Schattenwurm",
+                7, 14, 12, 50,
+                new List<string> { "Verderbnisstoß", "Tentakelpeitsche" },
+                MonsterDropsLibrary.MonsterDrops["Schattenwurm"]
+            );
+        }
+
+        public static Monster Kristallameise()
+        {
+            return new Monster(
+                "Kristallameise",
+                3, 6, 10, 30,
+                new List<string> { "Knochensplitter", "Giftwolke" },
+                MonsterDropsLibrary.MonsterDrops["Kristallameise"]
+            );
+        }
+
+        public static Monster Frostgolem()
+        {
+            return new Monster(
+                "Frostgolem",
+                6, 12, 8, 45,
+                new List<string> { "Eislanze", "Frostlanze" },
+                MonsterDropsLibrary.MonsterDrops["Frostgolem"]
+            );
+        }
+
+        public static Monster Pyrosprite()
+        {
+            return new Monster(
+                "Pyrosprite",
+                4, 8, 12, 32,
+                new List<string> { "Schattenflamme", "Feuerexplosion" },
+                MonsterDropsLibrary.MonsterDrops["Pyrosprite"]
+            );
+        }
+
+
     }
 
     public static class MonsterAttackLibrary
     {
         public static Dictionary<string, AttackMonster> MonsterAttacks = new()
             {
-                {"Dolchstoß", new AttackMonster("Dolchstoß", 20, 95 )},
                 {"Raserei", new AttackMonster("Raserei", 25, 80)},
                 {"Sturmangriff", new AttackMonster("Sturmangriff", 28, 90)},
                 {"Feueratem", new AttackMonster("Feueratem", 25, 95)},
-                {"Giftbiss" , new AttackMonster("Giftbiss", 20, 90)},
-
-                {"Knochenhieb", new AttackMonster("Knochenhieb", 12, 90)},
+                {"Giftbiss", new AttackMonster("Giftbiss", 20, 90)},
                 {"Klauenwirbel", new AttackMonster("Klauenwirbel", 10, 95)},
                 {"Schattenstoß", new AttackMonster("Schattenstoß", 15, 85)},
                 {"Zornhieb", new AttackMonster("Zornhieb", 18, 80)},
                 {"Erdspalter", new AttackMonster("Erdspalter", 22, 70)},
-                {"Blutklinge", new AttackMonster("Blutklinge", 14, 90)},
-                {"Berserkeransturm", new AttackMonster("Berserkeransturm", 20, 75)},
-                {"Donnertritt", new AttackMonster("Donnertritt", 16, 85)},
-                {"Splitterfaust", new AttackMonster("Splitterfaust", 13, 92)},
-                {"Verwüster", new AttackMonster("Verwüster", 25, 65)},
-
                 {"Frostlanze", new AttackMonster("Frostlanze", 17, 90)},
                 {"Glutwelle", new AttackMonster("Glutwelle", 18, 85)},
                 {"Kettenblitz", new AttackMonster("Kettenblitz", 20, 80)},
-                {"Säureregen", new AttackMonster("Säureregen", 12, 95)},
-                {"Arkaneruption", new AttackMonster("Arkaneruption", 23, 75)},
-                {"Schattenflamme", new AttackMonster("Schattenflamme", 19, 85)},
+                {"Arkaneruption", new AttackMonster("Arkaneruption", 23, 75)},             
                 {"Nebelgriff", new AttackMonster("Nebelgriff", 10, 98)},
                 {"Seelenbrand", new AttackMonster("Seelenbrand", 22, 70)},
                 {"Astralschlag", new AttackMonster("Astralschlag", 16, 90)},
                 {"Geisterklinge", new AttackMonster("Geisterklinge", 14, 93)},
-
                 {"Tentakelpeitsche", new AttackMonster("Tentakelpeitsche", 11, 95)},
                 {"Giftwolke", new AttackMonster("Giftwolke", 13, 90)},
-                {"Schallkreischer", new AttackMonster("Schallkreischer", 18, 80)},
-                {"Zehrende Berührung", new AttackMonster("Zehrende Berührung", 16, 88)},
+                {"Schattenflamme", new AttackMonster("Schattenflamme", 19, 85)},
                 {"Knochensplitter", new AttackMonster("Knochensplitter", 15, 90)},
-                {"Schuppenschlag", new AttackMonster("Schuppenschlag", 14, 94)},
-                {"Rasender Sprung", new AttackMonster("Rasender Sprung", 17, 82)},
-                {"Verderbnisstoß", new AttackMonster("Verderbnisstoß", 21, 75)},
-                {"Magenbrecher", new AttackMonster("Magenbrecher", 19, 85)},
-                {"Seuchenbiss", new AttackMonster("Seuchenbiss", 12, 92)},
+                {"Eislanze", new AttackMonster("Eislanze", 20, 88)},
+                {"Photonstrahl", new AttackMonster("Photonstrahl", 25, 80)},
+                {"Nanopeitsche", new AttackMonster("Nanopeitsche", 18, 90)},
+                {"Griff der Ätherwölfe", new AttackMonster("Griff der Ätherwölfe", 22, 85)},
+                {"Flammenhieb", new AttackMonster("Flammenhieb", 20, 87)},
+                {"Steinschmetter", new AttackMonster("Steinschmetter", 23, 78)},
+                {"Sternenfeuer", new AttackMonster("Sternenfeuer", 24, 75)},
+                {"Kryostachel", new AttackMonster("Kryostachel", 18, 85)},
+                {"Feuerexplosion", new AttackMonster("Feuerexplosion", 21, 80)},
+                {"Schattensprung", new AttackMonster("Schattensprung", 14, 95)},
+                {"Gravitationsstoß", new AttackMonster("Gravitationsstoß", 20, 77)},
+                {"Zeitschlag", new AttackMonster("Zeitschlag", 22, 80)},
+                {"Stachelstich", new AttackMonster("Stachelstich", 16, 85)},
+                {"Biss", new AttackMonster("Biss", 18, 90)},
+                {"Flügelstoß", new AttackMonster("Flügelstoß", 20, 85)},
+                {"Zeitenbiss", new AttackMonster("Zeitenbiss", 25, 80)},
+                {"Schockscheren", new AttackMonster("Schockscheren", 22, 80)},
+                {"Laserpeitsche", new AttackMonster("Laserpeitsche", 20, 88)},  
 
                 //Boss Attacken
                 // Welt 1 Boss Attacken
@@ -309,23 +537,41 @@ namespace RPG
     {
         public static Dictionary<string, MonsterDrop> MonsterDrops = new()
         {
-            // World 1 Drops 
-
-            {"Keiler", new MonsterDrop(50, "Hauer des Keilers", 100, 10 )},
-            {"UntoterRitter", new MonsterDrop(150, "Amulett der Untoten", 20, 15)},
-            {"MadScientist", new MonsterDrop(80, "Phiole des ewigen Lebens", 15, 12)},
-            {"LanzenRitter", new MonsterDrop(80, "Talisman des Ritterordens", 15, 15)},
-            {"Waldkobold", new MonsterDrop(40, "Splitter der Koboldmaske", 25, 17)},
-            {"Steinkaefer", new MonsterDrop(50, "Panzerfragment des Steinkäfers", 20, 14)},
-            {"Dorfschlaeger", new MonsterDrop(30, "Abgenutzter Knüppel", 40, 12)},
-            {"Schleimling", new MonsterDrop(25, "Glitschige Essenz", 35, 8)},
-            {"Kraehenschwarm", new MonsterDrop(35, "Rabenschwinge", 30, 7)},
+            // Monster Drops
+            {"Feuerkobold", new MonsterDrop(40, "Glühende Kohle", 25, 8)},
+            {"Nanoinsekt", new MonsterDrop(30, "Nano-Splitter", 20, 5)},
             {"Waldgeist", new MonsterDrop(45, "Flüstern der Bäume", 22, 6)},
-
-            // World 2 Drops
-
-            // World 3 Drops
-
+            {"Schattenkatze", new MonsterDrop(35, "Schattenschnurrhaare", 18, 7)},
+            {"Plasmaelementar", new MonsterDrop(60, "Plasmakristall", 30, 15)},
+            {"Höhlenlöwe", new MonsterDrop(50, "Reißzahn", 20, 12)},
+            {"Riesenhummel", new MonsterDrop(25, "Giftstachel", 15, 4)},
+            {"Cyberwolf", new MonsterDrop(55, "Cyberfaser", 22, 14)},
+            {"Eisdämon", new MonsterDrop(50, "Eiskristall", 25, 12)},
+            {"Mammut", new MonsterDrop(60, "Froststoß-Stoßzahn", 28, 18)},
+            {"Urvogel", new MonsterDrop(40, "Gefieder des Urvogels", 20, 10)},
+            {"Zeitdrache", new MonsterDrop(70, "Zeitsplitter", 35, 25)},
+            {"Drohnenwächter", new MonsterDrop(45, "Drohnenkern", 22, 9)},
+            {"Berserkerkrokodil", new MonsterDrop(55, "Krokodilschuppe", 25, 14)},
+            {"Walddryade", new MonsterDrop(35, "Tropfen der Natur", 18, 8)},
+            {"Schockdrone", new MonsterDrop(30, "Stromkern", 20, 6)},
+            {"Riesenhandkrabbe", new MonsterDrop(50, "Panzerplatte", 25, 12)},
+            {"Feuersprite", new MonsterDrop(40, "Funkenstaub", 20, 10)},
+            {"Steingolem", new MonsterDrop(60, "Golemstein", 28, 18)},
+            {"Cyberkrabbe", new MonsterDrop(50, "Schockschere", 25, 12)},
+            {"Phönixjunges", new MonsterDrop(65, "Asche des Phönix", 30, 20)},
+            {"Gnommechaniker", new MonsterDrop(35, "Zahnradsplitter", 18, 7)},
+            {"Kristalldrache", new MonsterDrop(70, "Kristallherz", 32, 25)},
+            {"Eisnymphe", new MonsterDrop(50, "Frostblüte", 25, 14)},
+            {"Trollkrieger", new MonsterDrop(60, "Trollhaut", 28, 18)},
+            {"Schattenkobold", new MonsterDrop(40, "Dunkelzahn", 20, 10)},
+            {"Wassergeist", new MonsterDrop(50, "Wassertropfen-Amulett", 25, 12)},
+            {"Drohnenjäger", new MonsterDrop(45, "Laserlinse", 22, 9)},
+            {"Nanomech-Golem", new MonsterDrop(55, "Nano-Armatur", 28, 15)},
+            {"Glutwyrm", new MonsterDrop(60, "Feuerherz-Schuppe", 30, 18)},
+            {"Erdklopper", new MonsterDrop(50, "Steinfaust", 25, 14)},
+            {"Schattenläufer", new MonsterDrop(35, "Dunkelfeder", 20, 8)},
+            {"Lichtgeist", new MonsterDrop(45, "Aurakristall", 22, 12)},
+           
             // Bossdrops
 
             {"Boss 1", new MonsterDrop(0, "Boss Item Welt 1", 100, 0)},

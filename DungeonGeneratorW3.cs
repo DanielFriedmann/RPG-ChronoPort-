@@ -1,9 +1,6 @@
-using System.Runtime.CompilerServices;
-
 namespace RPG
 {
-
-    public class DungeonGenerator
+    public class DungeonGenerator3
     {
         private static Random random = new Random();
 
@@ -15,40 +12,31 @@ namespace RPG
             Boss
         }
 
-        public static List<(DungeonEvent, DungeonEvent)> CreateDungeonPlanW1()
+        public static List<(DungeonEvent, DungeonEvent)> CreateDungeonPlanW3()
         {
             List<(DungeonEvent, DungeonEvent)> plan = new List<(DungeonEvent, DungeonEvent)>();
 
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Monster)); // Runde 1
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire)); // Runde 1 - Heilungsmöglichkeit
             plan.Add((DungeonEvent.Monster, DungeonEvent.Monster)); // Runde 2
             plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire)); // Runde 3
-
-            bool variantA = random.Next(0, 2) == 0;
-
-            if (variantA)
-            {
-                plan.Add((DungeonEvent.Monster, DungeonEvent.Shop));
-                plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));
-            }
-            else
-            {
-                plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));
-                plan.Add((DungeonEvent.Shop, DungeonEvent.Monster));
-            }
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Shop));//Runde 4
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));//Runde 5
+          
             return plan;
         }
 
-        public static void GenerateDungeonW1(BasePlayer held)
+        public static void GenerateDungeonW2(BasePlayer held)
         {
-            List<MonsterRoom> monsterRooms = RandomWorld1(11);
-            List<Campfire> campfires = RandomCampfireW1();
-            List<Shop> shops = RandomShopW1();
+            List<MonsterRoom> monsterRooms = RandomWorld3();
+            List<Campfire> campfires = RandomCampfireW3();
+            List<Shop> shops = RandomShopW3();
 
             int monsterIndex = 0;
             int campIndex = 0;
             int shopIndex = 0;
 
-            List<(DungeonEvent, DungeonEvent)> plan = CreateDungeonPlanW1();
+            List<(DungeonEvent, DungeonEvent)> plan = CreateDungeonPlanW3();
+            Console.WriteLine("Willkommen in Welt 3!");
 
             for (int round = 0; round < plan.Count; round++)
             {
@@ -87,10 +75,10 @@ namespace RPG
             }
 
             Console.WriteLine("Du bist nun beim Boss....");
-            BossMonster boss = RandomBossWorld1()[0];
+            BossMonster boss = RandomBossWorld3()[0];
             BossBattle.BossKampf(held, boss);
-            Console.WriteLine("Du hast Welt 1 gecleart!");
-            Console.WriteLine("Welt 2 -TBD");
+            Console.WriteLine("Du hast Welt 3 gecleart!");
+            Console.WriteLine("GAME END");
 
             void ShopEvent(Shop shop)
             {
@@ -106,9 +94,9 @@ namespace RPG
                 Console.WriteLine(campfire.RoomName);
                 Console.WriteLine(campfire.Description);
                 Console.WriteLine($"Du setzt dich eine Weile ans Lagerfeuer. HP {player.Health}");
-                if (player.Health + 10 <= player.MaxHP)
+                if (player.Health + 15 <= player.MaxHP)
                 {
-                    player.Health += 10;
+                    player.Health += 15;
                 }
                 else
                 {
@@ -136,35 +124,21 @@ namespace RPG
             }
         }
 
-        public static List<MonsterRoom> RandomWorld1(int diff)
+        public static List<MonsterRoom> RandomWorld3()
         {
             List<MonsterRoom> roomList = new List<MonsterRoom>()
             {
-                MonsterRoomFactory.A1(),
-                MonsterRoomFactory.A2(),
-                MonsterRoomFactory.A3(),
-                MonsterRoomFactory.A4(),
-                MonsterRoomFactory.A5(),
-                MonsterRoomFactory.A6(),
-                MonsterRoomFactory.A7(),
-                MonsterRoomFactory.A8(),
-                MonsterRoomFactory.A9(),
-                MonsterRoomFactory.A10(),
-                MonsterRoomFactory.A11()
-            };
-
-            roomList = roomList.OrderBy(x => random.Next()).ToList();
-
-            return roomList.Take(diff).ToList();
-        }
-
-        public static List<BossMonster> RandomBossWorld1()
-        {
-            List<BossMonster> roomList = new List<BossMonster> ()
-            {
-                BossFactory.ChronoRex(),
-                BossFactory.RiftMammut(),
-                BossFactory.PrimalHydra(),
+                MonsterRoomFactory.C1(),
+                MonsterRoomFactory.C2(),
+                MonsterRoomFactory.C3(),
+                MonsterRoomFactory.C4(),
+                MonsterRoomFactory.C5(),
+                MonsterRoomFactory.C6(),
+                MonsterRoomFactory.C7(),
+                MonsterRoomFactory.C8(),
+                MonsterRoomFactory.C9(),
+                MonsterRoomFactory.C10(),
+                MonsterRoomFactory.C11()
             };
 
             roomList = roomList.OrderBy(x => random.Next()).ToList();
@@ -172,13 +146,27 @@ namespace RPG
             return roomList;
         }
 
-        public static List<Campfire> RandomCampfireW1()
+        public static List<BossMonster> RandomBossWorld3()
+        {
+            List<BossMonster> roomList = new List<BossMonster>()
+            {
+                BossFactory.Aethernox(),
+                BossFactory.Solaryth(),
+                BossFactory.Nihilgron(),
+            };
+
+            roomList = roomList.OrderBy(x => random.Next()).ToList();
+
+            return roomList;
+        }
+
+        public static List<Campfire> RandomCampfireW3()
         {
             List<Campfire> campList = new List<Campfire>()
             {
-                Camping.CreateCampfireW1A(),
-                Camping.CreateCampfireW1B(),
-                Camping.CreateCampfireW1C()
+                Camping.CreateCampfireW3A(),
+                Camping.CreateCampfireW3B(),
+                Camping.CreateCampfireW3C()
             };
 
             campList = campList.OrderBy(x => random.Next()).ToList();
@@ -186,19 +174,18 @@ namespace RPG
             return campList;
         }
 
-        public static List<Shop> RandomShopW1()
+        public static List<Shop> RandomShopW3()
         {
             List<Shop> shopList = new List<Shop>()
             {
-               Shopping.CreateShopW1A(),
-               Shopping.CreateShopW1B(),
+               Shopping.CreateShopW3A(),
+               Shopping.CreateShopW3B(),
             };
 
             shopList = shopList.OrderBy(x => random.Next()).ToList();
 
             return shopList;
         }
-
 
     }
 }
