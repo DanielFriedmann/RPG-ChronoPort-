@@ -2,6 +2,7 @@ namespace RPG
 {
     public static class BattleSystem
     {
+
         public static void Kampf(BasePlayer player, Monster monster)
         {
             Console.WriteLine($"Kampf gestartet: {player.Name} VS {monster.Name}");
@@ -203,6 +204,173 @@ namespace RPG
             Random random = new Random();
             int index = random.Next(0, monster.AttackNames.Count);
             string attackName = monster.AttackNames[index];
+
+            return MonsterAttackLibrary.MonsterAttacks[attackName];
+        }
+
+        public static AttackMonster BossAttackRandomizer(BossMonster boss)
+        {
+            Random random = new Random();
+            int index = random.Next(0, boss.AttackNames.Count);
+            string attackName = boss.AttackNames[index];
+
+            return MonsterAttackLibrary.MonsterAttacks[attackName];
+        }
+    }
+
+    public static class BossBattle
+    {
+        public static void BossKampf(BasePlayer player, BossMonster monster)
+        {
+            Console.WriteLine($"Kampf gestartet: {player.Name} VS {monster.Name}");
+
+            while (player.Health > 0 && monster.Health > 0)
+            {
+                BossPlayerTurn(player, monster);
+
+                if (monster.Health <= 0)
+                    break;
+
+                BossMonsterTurn(player, monster);
+            }
+
+            if (player.Health > 0)
+            {
+                Console.WriteLine($"Du hast {monster.Name} besiegt!");
+                Console.WriteLine($"Du erhältst {monster.Drop2.DropXP} Erfahrung und {monster.Drop2.Gold} Gold.");
+                player.Xp += monster.Drop2.DropXP;
+                player.Money += monster.Drop2.Gold;
+                Console.WriteLine($"Du hast jetzt {player.Xp} XP und {player.Money} Gold");
+                Console.WriteLine($"{monster.Name} hat Loot gedroppt!");
+                Console.WriteLine($"Du erhältst {monster.Drop1.DropItem} und hast damit 1 von 3 Artefakten um die Welt wieder ins Lot zu bringen!");
+                Console.WriteLine($"Du erhältst {monster.Drop2.DropItem}!");
+                Level.LvlUpCheck(player);
+            }
+            else
+            {
+                Console.WriteLine("Spieler wurde besiegt..."); // GameOver
+            }
+        }
+
+        public static void BossMonsterTurn(BasePlayer player, BossMonster monster)
+        {
+            AttackMonster monsterAttack = BossAttackRandomizer(monster);
+            Console.WriteLine($"{monster.Name} greift mit {monsterAttack.AttackName} an.");
+
+            if (DoesHit(monsterAttack.AttackAccuracy))
+            {
+                int damage = 0;
+
+                if (player.Status == "block")
+                {
+                    damage = monsterAttack.AttackDamage - (player.Defense * 2);
+                    player.Status = "normal";
+                }
+                else
+                {
+                    damage = monsterAttack.AttackDamage - player.Defense;
+                }
+
+                if (damage > 0)
+                {
+                    player.Health -= damage;
+                    Console.WriteLine($"Du hast {damage} Schaden erlitten. HP: {player.Health}");
+                }
+                else
+                {
+                    Console.WriteLine("Der Schaden wurde komplett von der Rüstung negiert!");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Das Monster hat {monsterAttack.AttackName} verfehlt!");
+            }
+        }
+
+        public static void BossPlayerTurn(BasePlayer player, BossMonster monster)
+        {
+            string special = "Spezialangriff";
+            if (!string.IsNullOrEmpty(player.HeroAbility))
+            {
+                special = player.HeroAbility;
+            }
+
+            Console.WriteLine($"\n1. Angriff\t\t2. {special}");
+            Console.WriteLine("3. Blocken\t\t4. Inventar öffnen");
+
+            int userchoice = InputHelper.GetInt("Wähle eine Aktion aus:", 4);
+
+            switch (userchoice)
+            {
+                case 1:
+                    BossNormalAttack(player, monster);
+                    break;
+                case 2:
+                    if (!string.IsNullOrEmpty(player.HeroAbility))
+                    {
+                        // Optional: Implement Special Ability Logic hier
+                        Console.WriteLine($"{player.Name} nutzt {player.HeroAbility}!");
+                        BossNormalAttack(player, monster); // als Platzhalter
+                    }
+                    else
+                    {
+                        Console.WriteLine("Du hast noch keine Special Ability! Stattdessen normaler Angriff.");
+                        BossNormalAttack(player, monster);
+                    }
+                    break;
+                case 3:
+                    PlayerBlock(player);
+                    break;
+                case 4:
+                    // Inventar öffnen
+                    break;
+            }
+        }
+
+        public static void BossNormalAttack(BasePlayer player, BossMonster monster)
+        {
+            Console.WriteLine($"{player.Name} greift {monster.Name} an!");
+
+            if (DoesCrit(player.Crit))
+            {
+                int damage = (player.Attack - monster.Defense) * 2;
+                monster.Health -= damage;
+                Console.WriteLine($"Kritischer Treffer! Du machst {damage} Schaden! {monster.Name} HP: {monster.Health}");
+            }
+            else
+            {
+                int damage = player.Attack - monster.Defense;
+                monster.Health -= damage;
+                Console.WriteLine($"Du machst {monster.Name} {damage} Schaden! {monster.Name} HP: {monster.Health}");
+            }
+        }
+
+        public static void PlayerBlock(BasePlayer player)
+        {
+            Console.WriteLine("Du bist auf den nächsten Angriff gefasst und versuchst zu blocken.");
+            player.Status = "block";
+        }
+
+        public static bool DoesHit(int acc)
+        {
+            Random random = new Random();
+            int hit = random.Next(0, 101);
+            return hit < acc;
+        }
+
+        public static bool DoesCrit(int crit)
+        {
+            Random random = new Random();
+            int hit = random.Next(0, 101);
+            return hit <= crit;
+        }
+
+
+        public static AttackMonster BossAttackRandomizer(BossMonster boss)
+        {
+            Random random = new Random();
+            int index = random.Next(0, boss.AttackNames.Count);
+            string attackName = boss.AttackNames[index];
 
             return MonsterAttackLibrary.MonsterAttacks[attackName];
         }

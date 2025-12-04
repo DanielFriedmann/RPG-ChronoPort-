@@ -38,6 +38,29 @@ namespace RPG
 
     }
 
+    public class BossMonster : Creature
+    {
+        public List<string> AttackNames { get; set; }
+
+        public MonsterDrop Drop1 { get; set; }
+
+        public MonsterDrop Drop2 { get; set; }
+
+        public string Encountertext {get; set;}
+
+        public string Defeattext {get; set;}
+
+        public BossMonster(string name, int level, int attack, int defense, int health, List<string> attackname, MonsterDrop drop1, MonsterDrop drop2, string encounter, string defeat) 
+        : base(name, level, attack, defense, health)
+        {
+            AttackNames = attackname;
+            Drop1 = drop1;
+            Drop2 = drop2;
+            Encountertext = encounter;
+            Defeattext = defeat;            
+        }
+    }
+
     public class MonsterDrop
     {
         public int DropXP { get; set; }
@@ -115,7 +138,7 @@ namespace RPG
 
         public BasePlayer(string name, int level, int xp, int maxhp, int attack, int defense,
                              int health, int crit, int special, int maxsp,
-                              Inventory inv,  string heroability, int money = 0, string status = "normal") 
+                              Inventory inv, string heroability, int money = 0, string status = "normal")
                              : base(name, level, attack, defense, health)
         {
             Xp = xp;
@@ -145,10 +168,10 @@ namespace RPG
         public string Name { get; set; }
 
         public int Damage { get; set; }
-        
+
         public int Crit { get; set; }
 
-        public string Status {get; set; }
+        public string Status { get; set; }
 
         public PlayerSpAtt(string name, int damage, int crit, string status = "")
         {

@@ -86,6 +86,12 @@ namespace RPG
 
             }
 
+            Console.WriteLine("Du bist nun beim Boss....");
+            BossMonster boss = RandomBossWorld1()[0];
+            BossBattle.BossKampf(held, boss);
+            Console.WriteLine("Du hast Welt 1 gecleart!");
+            Console.WriteLine("Welt 2 -TBD");
+
             void ShopEvent(Shop shop)
             {
                 foreach (string item in shop.ShopInv)
@@ -150,6 +156,20 @@ namespace RPG
             roomList = roomList.OrderBy(x => random.Next()).ToList();
 
             return roomList.Take(diff).ToList();
+        }
+
+        public static List<BossMonster> RandomBossWorld1()
+        {
+            List<BossMonster> roomList = new List<BossMonster> ()
+            {
+                BossFactory.ChronoRex(),
+                BossFactory.RiftMammut(),
+                BossFactory.PrimalHydra(),
+            };
+
+            roomList = roomList.OrderBy(x => random.Next()).ToList();
+
+            return roomList;
         }
 
         public static List<Campfire> RandomCampfireW1()
