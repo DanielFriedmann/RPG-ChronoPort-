@@ -463,7 +463,7 @@ namespace RPG
                 {"Frostlanze", new AttackMonster("Frostlanze", 17, 90)},
                 {"Glutwelle", new AttackMonster("Glutwelle", 18, 85)},
                 {"Kettenblitz", new AttackMonster("Kettenblitz", 20, 80)},
-                {"Arkaneruption", new AttackMonster("Arkaneruption", 23, 75)},             
+                {"Arkaneruption", new AttackMonster("Arkaneruption", 23, 75)},
                 {"Nebelgriff", new AttackMonster("Nebelgriff", 10, 98)},
                 {"Seelenbrand", new AttackMonster("Seelenbrand", 22, 70)},
                 {"Astralschlag", new AttackMonster("Astralschlag", 16, 90)},
@@ -489,7 +489,13 @@ namespace RPG
                 {"Flügelstoß", new AttackMonster("Flügelstoß", 20, 85)},
                 {"Zeitenbiss", new AttackMonster("Zeitenbiss", 25, 80)},
                 {"Schockscheren", new AttackMonster("Schockscheren", 22, 80)},
-                {"Laserpeitsche", new AttackMonster("Laserpeitsche", 20, 88)},  
+                {"Laserpeitsche", new AttackMonster("Laserpeitsche", 20, 88)},
+                {"Berserkeransturm", new AttackMonster("Berserkeransturm", 20, 75)},
+                {"Magenbrecher", new AttackMonster("Magenbrecher", 19, 85)},
+                {"Wurzelgriff", new AttackMonster("Wurzelgriff", 16, 88)},
+                {"Magisches Zischen", new AttackMonster("Magisches Zischen", 17, 90)},
+                {"Blitzkette", new AttackMonster("Blitzkette", 19, 82)},
+                {"Verderbnisstoß", new AttackMonster("Verderbnisstoß", 21, 75)},  
 
                 //Boss Attacken
                 // Welt 1 Boss Attacken
@@ -571,6 +577,11 @@ namespace RPG
             {"Erdklopper", new MonsterDrop(50, "Steinfaust", 25, 14)},
             {"Schattenläufer", new MonsterDrop(35, "Dunkelfeder", 20, 8)},
             {"Lichtgeist", new MonsterDrop(45, "Aurakristall", 22, 12)},
+            {"Lavakriecher", new MonsterDrop(50, "Lavakralle", 10, 14)},
+            {"Schattenwurm", new MonsterDrop(70, "Dunkelheitskern", 15, 25)},
+            {"Kristallameise", new MonsterDrop(30, "Kristalline Klinge", 20, 6)},
+            {"Frostgolem", new MonsterDrop(60, "Eisblock", 28, 18)},
+            {"Pyrosprite", new MonsterDrop(40, "Flammenfunken", 20, 10)},
            
             // Bossdrops
 

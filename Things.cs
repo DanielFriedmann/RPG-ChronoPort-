@@ -134,11 +134,13 @@ namespace RPG
 
         public int Money { get; set; }
 
+        public string Race { get; set; }
+
         public Inventory Inventory { get; set; }
 
         public BasePlayer(string name, int level, int xp, int maxhp, int attack, int defense,
                              int health, int crit, int special, int maxsp,
-                              Inventory inv, string heroability, int money = 0, string status = "normal")
+                              Inventory inv, string race, string heroability, int money = 0, string status = "normal")
                              : base(name, level, attack, defense, health)
         {
             Xp = xp;
@@ -148,6 +150,7 @@ namespace RPG
             MaxSP = maxsp;
             Inventory = inv;
             Money = money;
+            Race = race;
             HeroAbility = heroability;
             Status = status;
         }

@@ -16,16 +16,16 @@ namespace RPG
         {
             List<(DungeonEvent, DungeonEvent)> plan = new List<(DungeonEvent, DungeonEvent)>();
 
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire)); // Runde 1 - Heilungsmöglichkeit
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Monster)); // Runde 2
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire)); // Runde 3
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Shop));//Runde 4
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));//Runde 5
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));    // Runde 1 - zusätzliche Heilungsmöglichkeit
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));     // Runde 2
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));    // Runde 3
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Shop));        //Runde 4
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));    //Runde 5
           
             return plan;
         }
 
-        public static void GenerateDungeonW2(BasePlayer held)
+        public static void GenerateDungeonW3(BasePlayer held)
         {
             List<MonsterRoom> monsterRooms = RandomWorld3();
             List<Campfire> campfires = RandomCampfireW3();

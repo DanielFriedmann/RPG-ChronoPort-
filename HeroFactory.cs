@@ -50,7 +50,7 @@ namespace RPG
             string ability = stats.HeroAbility;
                        
 
-            return new BasePlayer(name, level, xp, maxHP, attack, defense, health, crit, special, maxSP, inventory, ability);      
+            return new BasePlayer(name, level, xp, maxHP, attack, defense, health, crit, special, maxSP, inventory, playerRasse, ability);      
         }
     }
 
@@ -68,9 +68,15 @@ namespace RPG
     {
         public static Dictionary<string, PlayerSpAtt> specialMoves = new()
         {
+            //Rogue
+            {"Sprung der Assassinen", new PlayerSpAtt("Sprung der Assassinen", 25, 15,  "stealth")},
             {"Verstohlener Dolchstoß", new PlayerSpAtt("Verstohlener Dolchstoß", 15, 25, "stealth")},
-            {"Superblock", new PlayerSpAtt("Superblock", 0, 0, "superblock")},
-            {"Genkidama", new PlayerSpAtt("Genkidama", 55, 50, "stunned")}
+            //Krieger
+            {"Ansturm der 300 Krieger", new PlayerSpAtt("Ansturm der 300 Krieger", 0, 0, "focus")},
+            {"Genkidama", new PlayerSpAtt("Genkidama", 55, 50, "stunned")},
+            //Magier
+            {"Schwarze Magie", new PlayerSpAtt("Schwarze Magie", 30, 0, "focus")},
+            {"Avatarstrahl", new PlayerSpAtt("Avatarstrahl", 42, 25, "")},
         };
     }
 
