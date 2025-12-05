@@ -41,6 +41,7 @@ namespace RPG
             List<Campfire> campfires = RandomCampfireW2();
             List<Shop> shops = RandomShopW2();
             
+            int world = 2;
             int campIndex = 0;
             int shopIndex = 0;
 
@@ -68,29 +69,35 @@ namespace RPG
                 if (choice == 1)
                 {
                     if (left == DungeonEvent.Monster)
-                        BattleSystem.Kampf(held, monsterRooms[0 + round * 2].Monster);
+                    {
+                        DungeonHelper.EncounterMonster(monsterRooms[leftIndex]);
+                        BattleSystem.Kampf(held, monsterRooms[leftIndex].Monster);
+                    }
                     else if (left == DungeonEvent.Shop)
-                        DungeonHelper.ShopEvent(shops[0]);
+                        DungeonHelper.ShopEvent(shops[shopIndex]);
                     else if (left == DungeonEvent.Campfire)
                         DungeonHelper.CampfireEvent(campfires[campIndex], held, 14, campIndex);
                 }
                 else
                 {
                     if (right == DungeonEvent.Monster)
-                        BattleSystem.Kampf(held, monsterRooms[1 + round * 2].Monster);
+                    {
+                        DungeonHelper.EncounterMonster(monsterRooms[rightIndex]);
+                        BattleSystem.Kampf(held, monsterRooms[rightIndex].Monster);
+                    }
                     else if (right == DungeonEvent.Shop)
-                        DungeonHelper.ShopEvent(shops[0]);
+                        DungeonHelper.ShopEvent(shops[shopIndex]);
                     else if (right == DungeonEvent.Campfire)
                         DungeonHelper.CampfireEvent(campfires[campIndex], held, 14, campIndex);
                 }
 
             }
 
-            Console.WriteLine("Du bist nun beim Boss....");
+            
             BossMonster boss = RandomBossWorld2()[0];
-            BossBattle.BossKampf(held, boss);
-            Console.WriteLine("Du hast Welt 2 gecleart!");
-            Console.WriteLine("Welt 3 -TBD");
+            BossBattle.BossKampf(held, boss, world);
+            DungeonHelper.WorldEndScreen(held, world);   
+            
           
             void PrintEvent(DungeonEvent evt, int index)
             {

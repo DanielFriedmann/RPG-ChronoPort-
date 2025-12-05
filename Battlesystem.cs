@@ -5,6 +5,7 @@ namespace RPG
 
         public static void Kampf(BasePlayer player, Monster monster)
         {
+
             Console.WriteLine($"Kampf gestartet: {player.Name} VS {monster.Name}");
 
             while (player.Health > 0 && monster.Health > 0)
@@ -20,20 +21,7 @@ namespace RPG
             if (player.Health > 0)
             {
                 ClearPlayerStatus(player);
-                Console.WriteLine($"Du hast  {monster.Name} besiegt!");
-                Console.WriteLine($"Du erhältst {monster.Drop.DropXP} Erfahrung und {monster.Drop.Gold} Gold.");
-                player.Xp += monster.Drop.DropXP;
-                player.Money += monster.Drop.Gold;
-                Console.WriteLine($"Du hast jetzt {player.Xp} XP und {player.Money} Gold");
-
-                if (LootChance(monster.Drop))
-                {
-                    Console.WriteLine($"{monster.Name} hat Loot gedroppt!");
-                    Console.WriteLine($"Du erhältst {monster.Drop.DropItem}!");
-                }
-
-                Level.LvlUpCheck(player);
-
+                DungeonHelper.MonsterDefeat(player, monster);
             }
 
             else
@@ -307,8 +295,10 @@ namespace RPG
 
     public static class BossBattle
     {
-        public static void BossKampf(BasePlayer player, BossMonster monster)
+        public static void BossKampf(BasePlayer player, BossMonster monster, int world)
         {
+            Console.WriteLine("Du stehst vor einem großen Portal... Du gehst hindurch...");
+            Console.WriteLine(monster.Encountertext);
             Console.WriteLine($"Kampf gestartet: {player.Name} VS {monster.Name}");
 
             while (player.Health > 0 && monster.Health > 0)
@@ -324,15 +314,7 @@ namespace RPG
             if (player.Health > 0)
             {
                 BattleSystem.ClearPlayerStatus(player);
-                Console.WriteLine($"Du hast {monster.Name} besiegt!");
-                Console.WriteLine($"Du erhältst {monster.Drop2.DropXP} Erfahrung und {monster.Drop2.Gold} Gold.");
-                player.Xp += monster.Drop2.DropXP;
-                player.Money += monster.Drop2.Gold;
-                Console.WriteLine($"Du hast jetzt {player.Xp} XP und {player.Money} Gold");
-                Console.WriteLine($"{monster.Name} hat Loot gedroppt!");
-                Console.WriteLine($"Du erhältst {monster.Drop1.DropItem} und hast damit 1 von 3 Artefakten um die Welt wieder ins Lot zu bringen!");
-                Console.WriteLine($"Du erhältst {monster.Drop2.DropItem}!");
-                Level.LvlUpCheck(player);
+                DungeonHelper.BossDefeat(player, monster, world);
             }
             else
             {

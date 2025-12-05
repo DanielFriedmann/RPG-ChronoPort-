@@ -31,11 +31,12 @@ namespace RPG
             List<Campfire> campfires = RandomCampfireW3();
             List<Shop> shops = RandomShopW3();
 
+            int world = 3;
             int campIndex = 0;
             int shopIndex = 0;
 
             List<(DungeonEvent, DungeonEvent)> plan = CreateDungeonPlanW3();
-            Console.WriteLine("Willkommen in Welt 3!");
+            Console.WriteLine($"Willkommen in Welt {world}!");
 
             for (int round = 0; round < plan.Count; round++)
             {
@@ -45,6 +46,8 @@ namespace RPG
 
                 int leftIndex = round * 2;
                 int rightIndex = round * 2 + 1;
+
+                //Portalmethode implementieren
 
                 Console.Write("Linkes Portal ->");
                 PrintEvent(left, leftIndex);
@@ -58,7 +61,10 @@ namespace RPG
                 if (choice == 1)
                 {
                     if (left == DungeonEvent.Monster)
+                    {
+                        DungeonHelper.EncounterMonster(monsterRooms[leftIndex]);
                         BattleSystem.Kampf(held, monsterRooms[leftIndex].Monster);
+                    }
                     else if (left == DungeonEvent.Shop)
                         DungeonHelper.ShopEvent(shops[shopIndex]);
                     else if (left == DungeonEvent.Campfire)
@@ -67,7 +73,10 @@ namespace RPG
                 else
                 {
                     if (right == DungeonEvent.Monster)
+                    {
+                        DungeonHelper.EncounterMonster(monsterRooms[rightIndex]);
                         BattleSystem.Kampf(held, monsterRooms[rightIndex].Monster);
+                    }
                     else if (right == DungeonEvent.Shop)
                         DungeonHelper.ShopEvent(shops[shopIndex]);
                     else if (right == DungeonEvent.Campfire)
@@ -75,12 +84,9 @@ namespace RPG
                 }
 
             }
-
-            Console.WriteLine("Du bist nun beim Boss....");
             BossMonster boss = RandomBossWorld3()[0];
-            BossBattle.BossKampf(held, boss);
-            Console.WriteLine("Du hast Welt 3 gecleart!");
-            Console.WriteLine("GAME END");
+            BossBattle.BossKampf(held, boss, world);
+            DungeonHelper.FinalScreen(held);
 
             void PrintEvent(DungeonEvent evt, int index)
             {

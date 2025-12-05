@@ -1,7 +1,50 @@
+using System.Collections.Concurrent;
+
 namespace RPG
 {
     public class DungeonHelper
     {
+
+        public static void EncounterMonster(MonsterRoom room)
+        {
+            Console.WriteLine($"Du findest dich im Jahr {room.RoomName} wieder!");
+            Console.WriteLine(room.Description);
+            Console.WriteLine(room.EncounterDescription1);
+            Console.WriteLine(room.EncounterDescription2);
+            Console.WriteLine($"Ein wildes {room.Monster.Name} erscheint!");
+        }
+
+        public static void MonsterDefeat(BasePlayer player, Monster monster)
+        {
+            Console.WriteLine($"Du hast  {monster.Name} besiegt!");
+            Console.WriteLine($"Du erhältst {monster.Drop.DropXP} Erfahrung und {monster.Drop.Gold} Gold.");
+            player.Xp += monster.Drop.DropXP;
+            player.Money += monster.Drop.Gold;
+            Console.WriteLine($"Du hast jetzt {player.Xp} XP und {player.Money} Gold");
+
+            if (BattleSystem.LootChance(monster.Drop))
+            {
+                Console.WriteLine($"{monster.Name} hat Loot gedroppt!");
+                Console.WriteLine($"Du erhältst {monster.Drop.DropItem}!");
+            }
+
+            Level.LvlUpCheck(player);
+        }
+
+        public static void BossDefeat(BasePlayer player, BossMonster monster, int world)
+        {
+            Console.WriteLine(monster.Defeattext);
+            Console.WriteLine($"Du hast {monster.Name} besiegt!");
+            Console.WriteLine($"Du erhältst {monster.Drop2.DropXP} Erfahrung und {monster.Drop2.Gold} Gold.");
+            player.Xp += monster.Drop2.DropXP;
+            player.Money += monster.Drop2.Gold;
+            Console.WriteLine($"Du hast jetzt {player.Xp} XP und {player.Money} Gold");
+            Console.WriteLine($"{monster.Name} hat Loot gedroppt!");
+            Console.WriteLine($"Du erhältst {monster.Drop1.DropItem} und hast damit {world} von 3 Artefakten um die Welt wieder ins Lot zu bringen!");
+            Console.WriteLine($"Du erhältst {monster.Drop2.DropItem}!");
+            Level.LvlUpCheck(player);
+        }
+
         public static void ShopEvent(Shop shop)
         {
             foreach (string item in shop.ShopInv)
@@ -116,15 +159,98 @@ namespace RPG
                 {
                     value = player.Money;
                 }
-                
+
                 player.Money -= value;
                 Console.WriteLine(eventtext);
                 Console.WriteLine($"{player.Name} hat {value} Gold verloren! Aktuelles Gold: {player.Money}");
             }
         }
 
-        //dungeon print screen - save etc
-        //dungeon final screen
+        public static void WorldEndScreen(BasePlayer player, int world)
+        {
+            Console.WriteLine($"Glückwunsch, {player.Name} du hast Welt {world} geschafft!");
+            int choice = InputHelper.GetInt("Was möchtest du tun?\n1.Nächste Welt\n2.Speichern und Beenden", 2);
+            if(choice == 1)
+            {
+                Console.WriteLine($"Weiter gehts mit Welt {world + 1}!");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Spiel wird gespeichert... TBD");
+                //dungeon save methode
+            }
+
+
+        }
+
+        public static void EndLore()
+        {
+            Console.WriteLine("Du bringst alle 3 Artefakte zum Chrono Portal");
+            Console.WriteLine("Die Artefakte vibrieren.....");
+            //Restliche Lore
+        }
+
+        public static void Credits()
+        {
+            Console.WriteLine("Das war CHRONO-PORT");
+            Console.WriteLine();
+            CreditHelper("Entwickler");
+            CreditHelper("Worldbuilding");
+            CreditHelper("Characterdesign");
+            CreditHelper("Sound und Animation");
+            Console.WriteLine("==========================");
+            Console.WriteLine("Drücke Enter um ins Hauptmenü zu kommen.");
+            //Hautpmenü aufruf
+
+        }
+
+        public static void CreditHelper(string credit)
+        {
+            Console.WriteLine($"{credit}: Daniel Friedmann");
+            Thread.Sleep(1000);
+            Console.WriteLine();            
+        }
+        
+        public static void FinalScreen(BasePlayer player)
+        {
+            EndLore();
+            Console.Clear();
+            Console.WriteLine("Herzlichen Glückwunsch! Du hast das Spiel beendet!");
+            Console.WriteLine("====================================================");
+            Console.WriteLine($"Spieler: {player.Name}");
+            Console.WriteLine($"Rasse: {player.Race}");
+            Console.WriteLine($"Ability: {player.HeroAbility}");
+            Console.WriteLine($"===================================================");
+            Console.WriteLine($"Health: {player.Health}/{player.MaxHP} HP");
+            Console.WriteLine($"Attack: {player.Attack}");
+            Console.WriteLine($"Defense: {player.Defense}");
+            Console.WriteLine($"Crit: {player.Crit}%");
+            Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP} SP");
+            Console.WriteLine("====================================================");
+            Console.WriteLine($"Der Held {player.Name} wurde der Hall of Fame hinzugefügt!");
+            //HoF methode
+            //monster counter
+            Console.WriteLine("Drücken Sie Enter um fortzufahren.");
+            Console.ReadLine();
+            Console.Clear();
+            Credits();        
+        }        
+        
+        // hall of fame
+
+        // pause methoden etablieren
+
+        public static void Pause()
+        {
+            Console.Write(" ➤ ");
+            Console.ReadKey(true);
+        }
+
+        public static void PauseTime(int time)
+        {
+            Thread.Sleep(time);
+        }
 
     }
 }

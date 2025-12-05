@@ -44,7 +44,8 @@ namespace RPG
             List<MonsterRoom> monsterRooms = RandomWorld1();
             List<Campfire> campfires = RandomCampfireW1();
             List<Shop> shops = RandomShopW1();
-            
+
+            int world = 1;            
             int campIndex = 0;
             int shopIndex = 0;
 
@@ -73,28 +74,33 @@ namespace RPG
                 if (choice == 1)
                 {
                     if (left == DungeonEvent.Monster)
-                        BattleSystem.Kampf(held, monsterRooms[0 + round * 2].Monster);
+                    {
+                        DungeonHelper.EncounterMonster(monsterRooms[leftIndex]);
+                        BattleSystem.Kampf(held, monsterRooms[leftIndex].Monster);
+                    }
                     else if (left == DungeonEvent.Shop)
-                        DungeonHelper.ShopEvent(shops[0]);
+                        DungeonHelper.ShopEvent(shops[shopIndex]);
                     else if (left == DungeonEvent.Campfire)
-                        DungeonHelper.CampfireEvent(campfires[0], held, 10, campIndex);
+                        DungeonHelper.CampfireEvent(campfires[campIndex], held, 10, campIndex);
                 }
                 else
                 {
                     if (right == DungeonEvent.Monster)
-                        BattleSystem.Kampf(held, monsterRooms[1 + round * 2].Monster);
+                    {
+                        DungeonHelper.EncounterMonster(monsterRooms[rightIndex]);
+                        BattleSystem.Kampf(held, monsterRooms[rightIndex].Monster);
+                    }
                     else if (right == DungeonEvent.Shop)
-                        DungeonHelper.ShopEvent(shops[0]);
+                        DungeonHelper.ShopEvent(shops[shopIndex]);
                     else if (right == DungeonEvent.Campfire)
-                        DungeonHelper.CampfireEvent(campfires[0], held, 10, campIndex);
+                        DungeonHelper.CampfireEvent(campfires[campIndex], held, 10, campIndex);
                 }
 
             }
 
-            Console.WriteLine("Du bist nun beim Boss....");
             BossMonster boss = RandomBossWorld1()[0];
-            BossBattle.BossKampf(held, boss);
-            Console.WriteLine("Du hast Welt 1 gecleart!");          
+            BossBattle.BossKampf(held, boss, world);
+            DungeonHelper.WorldEndScreen(held, world);       
             
 
             
