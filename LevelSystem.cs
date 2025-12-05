@@ -4,58 +4,66 @@ namespace RPG
     {
         public static void LvlUpCheck(BasePlayer player)
         {
-            switch (player.Level)
-            {
-                case 1:
-                    if (player.Xp > 50)
-                    {
-                        player.Level += 1;
-                        Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
-                        LvlUpScreen(player);
-                    }
-                    break;
-                case 2:
-                    if (player.Xp > 100)
-                    {
-                        player.Level += 1;
-                        Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
-                        LvlUpScreen(player);
-                    }
-                    break;
-                case 3:
-                    if (player.Xp > 300)
-                    {
-                        player.Level += 1;
-                        Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
-                        LvlUpScreen(player);
-                        ChooseSub(player);
-                    }
-                    break;
-                case 4:
-                    if (player.Xp > 400)
-                    {
-                        player.Level += 1;
-                        Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
-                        LvlUpScreen(player);
-                    }
-                    break;
-                case 5:
-                    if (player.Xp > 500)
-                    {
-                        player.Level += 1;
-                        Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
-                        LvlUpScreen(player);
-                    }
-                    break;
+            
+            int lvl2 = 50;
+            int lvl3 = 100;
+            int lvl4 = 300;
+            int lvl5 = 500;
+            int lvl6 = 700;
+            int lvl7 = 900;
+            int lvl8 = 1200;
 
+            if(player.Xp > lvl8 && player.Level < 8)
+            {
+                player.Level = 8;
+                Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
+                LvlUpScreen(player);
             }
+            else if(player.Xp > lvl7 && player.Level < 7)
+            {
+                player.Level = 7;
+                Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
+                LvlUpScreen(player);
+            }
+            else if (player.Xp > lvl6 && player.Level < 6)
+            {
+                player.Level = 6;
+                Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
+                LvlUpScreen(player);
+            }
+            else if (player.Xp > lvl5 && player.Level < 5)
+            {
+                player.Level = 5;
+                Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
+                LvlUpScreen(player);
+            }
+            else if (player.Xp > lvl4 && player.Level < 4)
+            {
+                player.Level = 4;
+                Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
+                LvlUpScreen(player);
+            }
+            else if (player.Xp > lvl3 && player.Level < 3)
+            {
+                player.Level = 3;
+                Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
+                LvlUpScreen(player);
+                ChooseSub(player);
+            }
+            else if (player.Xp > lvl2 && player.Level < 2)
+            {
+                player.Level = 2;
+                Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
+                LvlUpScreen(player);
+            }         
         }
+
 
         public static void ChooseSub(BasePlayer player)
         {
             Console.WriteLine("Glückwunsch! Du hast eine Subklasse freigeschaltet!");
-            Console.WriteLine("==================================================================================");            
-            if(player.Race == "Krieger")
+            Console.WriteLine("==================================================================================");
+            if (player.Race == "Krieger")
             {
                 Console.WriteLine("1. Sayajin. Gibt dir eine Fähigkeit die nur wahre Sayajin entfesseln können");
                 Console.WriteLine("2. Titan. Werde zum Fels in der Brandung für alle die dir wichtig sind.");
@@ -74,11 +82,11 @@ namespace RPG
                 }
             }
 
-            else if(player.Race == "Magier")
+            else if (player.Race == "Magier")
             {
                 Console.WriteLine("1. Dunkler Magier. Gefürchtet vorallem von Drachen mit eiskaltem Blick.");
                 Console.WriteLine("2. Astral Magier. Du wirst zum Herr der vier Elemente.");
-                 int choice = InputHelper.GetInt("Wähle eine Option", 2);
+                int choice = InputHelper.GetInt("Wähle eine Option", 2);
                 if (choice == 1)
                 {
                     Console.WriteLine("Du bist jetzt ein Dunkler Magier! Spezialfähigkeit ist nun Schwarze Magie!");
@@ -93,11 +101,11 @@ namespace RPG
                 }
             }
 
-            else if(player.Race == "Schurke")
+            else if (player.Race == "Schurke")
             {
                 Console.WriteLine("1. Assassine. Aus dem Verborgenen kommt tödliche Mordlust.");
                 Console.WriteLine("2. Gieriger Schurke. Du behältst deine bisherige Ability und bekommst 100 Gold");
-                 int choice = InputHelper.GetInt("Wähle eine Option", 2);
+                int choice = InputHelper.GetInt("Wähle eine Option", 2);
                 if (choice == 1)
                 {
                     Console.WriteLine("Du bist jetzt ein Assassine! Spezialfähigkeit ist nun Sprung der Assassinen!");
@@ -107,7 +115,7 @@ namespace RPG
                 else if (choice == 2)
                 {
                     Console.WriteLine("Du bist jetzt ein Gieriger Schurke! Spezialfähigkeit bleibt verstohlener Dolchstoß");
-                    player.Race = "Gieriger Schurke";                    
+                    player.Race = "Gieriger Schurke";
                 }
             }
         }
@@ -138,7 +146,7 @@ namespace RPG
                 case 3:
                     player.MaxHP += 5;
                     Console.WriteLine($"Max HP wurde erhöht. {player.MaxHP - 5} => {player.MaxHP}");
-                    if(player.Health + 5 >= player.MaxHP)
+                    if (player.Health + 5 >= player.MaxHP)
                     {
                         player.Health = player.MaxHP;
                         Console.WriteLine($"HP: {player.Health}/{player.MaxHP}");
@@ -153,7 +161,7 @@ namespace RPG
                 case 4:
                     player.MaxSP += 1;
                     Console.WriteLine($"Max SP wurden erhöht. {player.MaxSP - 1} => {player.MaxSP}");
-                    if(player.SpecialPoints + 1 >= player.MaxSP)
+                    if (player.SpecialPoints + 1 >= player.MaxSP)
                     {
                         player.SpecialPoints = player.MaxSP;
                         Console.WriteLine($"SP: {player.SpecialPoints}/{player.MaxSP}");

@@ -2,7 +2,6 @@ namespace RPG
 {
     public static class BattleSystem
     {
-        public static int counterBlock;
 
         public static void Kampf(BasePlayer player, Monster monster)
         {
@@ -304,8 +303,6 @@ namespace RPG
 
             return MonsterAttackLibrary.MonsterAttacks[attackName];
         }
-
-
     }
 
     public static class BossBattle
@@ -326,6 +323,7 @@ namespace RPG
 
             if (player.Health > 0)
             {
+                BattleSystem.ClearPlayerStatus(player);
                 Console.WriteLine($"Du hast {monster.Name} besiegt!");
                 Console.WriteLine($"Du erhältst {monster.Drop2.DropXP} Erfahrung und {monster.Drop2.Gold} Gold.");
                 player.Xp += monster.Drop2.DropXP;
@@ -347,7 +345,7 @@ namespace RPG
             AttackMonster monsterAttack = BossAttackRandomizer(monster);
             Console.WriteLine($"{monster.Name} greift mit {monsterAttack.AttackName} an.");
 
-            if (DoesHit(monsterAttack.AttackAccuracy))
+            if (BattleSystem.DoesHit(monsterAttack.AttackAccuracy, player)) //inkl. stealth check
             {
                 int damage = 0;
 
@@ -377,6 +375,7 @@ namespace RPG
             }
         }
 
+
         public static void BossPlayerTurn(BasePlayer player, BossMonster monster)
         {
             string special = "Spezialangriff";
@@ -384,44 +383,82 @@ namespace RPG
             {
                 special = player.HeroAbility;
             }
-
-            Console.WriteLine($"\n1. Angriff\t\t2. {special}");
-            Console.WriteLine("3. Blocken\t\t4. Inventar öffnen");
-
-            int userchoice = InputHelper.GetInt("Wähle eine Aktion aus:", 4);
-
-            switch (userchoice)
+            if (BattleSystem.CheckStatusPlayer(player) == 1) // Stun Check inkludiert
             {
-                case 1:
-                    BossNormalAttack(player, monster);
-                    break;
-                case 2:
-                    if (!string.IsNullOrEmpty(player.HeroAbility))
-                    {
-                        // Optional: Implement Special Ability Logic hier
-                        Console.WriteLine($"{player.Name} nutzt {player.HeroAbility}!");
-                        BossNormalAttack(player, monster); // als Platzhalter
-                    }
-                    else
-                    {
-                        Console.WriteLine("Du hast noch keine Special Ability! Stattdessen normaler Angriff.");
-                        BossNormalAttack(player, monster);
-                    }
-                    break;
-                case 3:
-                    PlayerBlock(player);
-                    break;
-                case 4:
-                    // Inventar öffnen
-                    break;
+                Console.WriteLine("Du bist noch stunned! Du kannst diese Runde nicht angreifen!");
+                player.Status = "";
             }
+
+            else
+            {
+
+                Console.WriteLine($"\n1. Angriff\t\t2. {special}");
+                Console.WriteLine("3. Blocken\t\t4. Inventar öffnen");
+
+                int userchoice = InputHelper.GetInt("Wähle eine Aktion aus:", 4);
+
+                switch (userchoice)
+                {
+                    case 1:
+                        BossNormalAttack(player, monster);
+                        break;
+                    case 2:
+                        if (player.HeroAbility != "")
+                        {
+                            if (player.SpecialPoints > 0)
+                            {
+                                SpecialAbility(player, monster);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Du hast keine SpecialPoints mehr! {player.SpecialPoints}/{player.MaxSP} ");
+                                Console.WriteLine("Es wird stattdessen ein normaler Angrif ausgeführt!");
+                                BossNormalAttack(player, monster);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Du hast noch keine Special Ability! Stattdessen normaler Angriff.");
+                            BossNormalAttack(player, monster);
+                        }
+                        break;
+                    case 3:
+                        BattleSystem.PlayerBlock(player);
+                        break;
+                    case 4:
+                        // Inventar öffnen
+                        Console.WriteLine("Inventar TBD");
+                        break;
+                }
+            }
+        }
+
+        public static void SpecialAbility(BasePlayer player, BossMonster monster)
+        {
+            PlayerSpAtt special = RaceAbility.specialMoves[player.HeroAbility];
+            Console.WriteLine($"{player.Name} setzt {player.HeroAbility} ein!");
+            if (BattleSystem.DoesCrit(special.Crit, player))
+            {
+                int damage = special.Damage * 2;
+                monster.Health -= damage;
+                Console.WriteLine("Kritischer Treffer!");
+                Console.WriteLine($"{monster.Name} erleidet {damage} Schaden. HP: {monster.Health}");
+            }
+            else
+            {
+                int damage = special.Damage;
+                monster.Health -= damage;
+                Console.WriteLine($"{monster.Name} erleidet {damage} Schaden. HP: {monster.Health}");
+            }
+            player.Status = special.Status;
+            player.SpecialPoints -= 1;
         }
 
         public static void BossNormalAttack(BasePlayer player, BossMonster monster)
         {
             Console.WriteLine($"{player.Name} greift {monster.Name} an!");
 
-            if (DoesCrit(player.Crit))
+            if (BattleSystem.DoesCrit(player.Crit, player)) // focus check inkludiert
             {
                 int damage = (player.Attack - monster.Defense) * 2;
                 monster.Health -= damage;
@@ -434,27 +471,6 @@ namespace RPG
                 Console.WriteLine($"Du machst {monster.Name} {damage} Schaden! {monster.Name} HP: {monster.Health}");
             }
         }
-
-        public static void PlayerBlock(BasePlayer player)
-        {
-            Console.WriteLine("Du bist auf den nächsten Angriff gefasst und versuchst zu blocken.");
-            player.Status = "block";
-        }
-
-        public static bool DoesHit(int acc)
-        {
-            Random random = new Random();
-            int hit = random.Next(0, 101);
-            return hit < acc;
-        }
-
-        public static bool DoesCrit(int crit)
-        {
-            Random random = new Random();
-            int hit = random.Next(0, 101);
-            return hit <= crit;
-        }
-
 
         public static AttackMonster BossAttackRandomizer(BossMonster boss)
         {

@@ -66,16 +66,22 @@ namespace RPG
                 {"Runenamulet", 50}
             };
 
+        //shop methode für kaufen und info
+
 
 
     }
 
     public static class Camping
     {
-        public static List<string> randosW1 = new List<string>{
+        public static Random random = new Random();
+
+        public static List<string> randosW1u = new List<string>{
             "Reisender aus Tamriel",
             "Wanderer aus einem fernen Land",
             "Barde aus Westeros"};
+
+        public static List<string> randosW1 = randosW1u.OrderBy(x => random.Next()).ToList();
 
         //Welt 1 Campfires
         public static Campfire CreateCampfireW1A()
@@ -99,10 +105,12 @@ namespace RPG
             randosW1);
         }
 
-        public static List<string> randosW2 = new List<string>{
-            "Tinker Nova",
-            "Schmied Gearlo",
-            "Ingenieur Pixel"};
+        public static List<string> randosW2u = new List<string>{
+            "Aethra Nova, die Sternenbastlerin",
+            "Gearlos, der Flammenrufer-Schmied",
+            "Pixelveil, der Maschinensänger"};
+
+        public static List<string> randosW2 = randosW2u.OrderBy(x => random.Next()).ToList();
 
         // Welt 2 Campfires
         public static Campfire CreateCampfireW2A()
@@ -126,11 +134,14 @@ namespace RPG
                 randosW2);
         }
 
-        public static List<string> randosW3 = new List<string>{
-            "Aethra die Kristallkundige",
+        public static List<string> randosW3u = new List<string>{
+            "Cyrilla die Kristallkundige",
             "Krynn der Schattenwanderer",
             "Shadowveil der Runenmeister"
             };
+
+        public static List<string> randosW3 = randosW3u.OrderBy(x => random.Next()).ToList();
+
 
         // Welt 3 Campfires
         public static Campfire CreateCampfireW3A()
@@ -154,4 +165,228 @@ namespace RPG
                 randosW3);
         }
     }
+
+    public static class NPCLibrary
+    {
+        public static Dictionary<string, Func<NPC>> NPCs = new Dictionary<string, Func<NPC>>()
+             {
+                // Welt 1
+                { "Reisender aus Tamriel", ReisenderAusTamriel },
+                { "Wanderer aus einem fernen Land", WandererAusFernenLand },
+                { "Barde aus Westeros", GoldspendenderBarde },
+         
+                // Welt 2
+                { "Aethra Nova, die Sternenbastlerin", AethraNova },
+                { "Gearlos, der Flammenrufer-Schmied", Gearlos },
+                { "Pixelveil, der Maschinensänger", Pixelveil },
+
+                // Welt 3
+                { "Cyrilla die Kristallkundige", Cyrilla },
+                { "Krynn der Schattenwanderer", Krynn },
+                { "Shadowveil der Runenmeister", Shadowveil }
+            };
+
+
+        public static NPC GoldspendenderBarde()
+        {
+            return new NPC(
+                "Barde aus Westeros",
+                "Ein fröhlicher Barde winkt dir zu: 'Willst du ein kleines Opfer für die Musik geben?'",
+                "Der Barde nickt dir zu: 'Möge dein Weg mit Melodien gesegnet sein!'",
+                (player) =>
+                {
+                    Console.WriteLine("Wie viele Münzen möchtest du spenden?");
+                    int coins = InputHelper.GetCoins($"Du hast {player.Money} Gold. Gib die Anzahl der Münzen ein:", player.Money);
+
+                    if (coins == 0)
+                    {
+                        Console.WriteLine("Der Barde schaut enttäuscht: 'Keine Münzen, keine Musik für dich.");
+                    }
+                    else if (coins <= 20)
+                    {
+                        DungeonHelper.AddBuff(player, "XP", 5, "Der Barde lächelt und spielt ein kleines Lied für dich.");
+                        Level.LvlUpCheck(player);
+                    }
+                    else
+                    {
+                        DungeonHelper.AddBuff(player, "XP", 25, "Der Barde ist überwältigt! Er spielt ein episches Meisterstück für dich.");
+                        Level.LvlUpCheck(player);
+                    }
+
+                    player.Money -= coins;
+                }
+            );
+        }
+
+        public static NPC ReisenderAusTamriel()
+        {
+            return new NPC(
+                "Reisender aus Tamriel",
+                "Ein wettergegerbter Wanderer wärmt sich am Feuer: 'Hast du Zeit für Geschichten aus fernen Landen?'",
+                "Der Reisende zieht weiter, die Geschichten hallen nach.",
+                (player) =>
+                {
+                    if (InputHelper.AskYesNo("Willst du den Geschichten lauschen?"))
+                    {
+                        DungeonHelper.AddBuff(player, "XP", 20, "Du hast den Geschichten aufmerksam zugehört und wertvolle Erfahrung gewonnen!");
+                        Level.LvlUpCheck(player);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Du ignorierst den Reisenden. Keine XP erhalten.");
+                    }
+                }
+            );
+        }
+
+        public static NPC WandererAusFernenLand()
+        {
+            return new NPC(
+                "Wanderer aus einem fernen Land",
+                "Ein Wanderer trägt vergilbte Karten und riecht nach Wüstensand: 'Gold gegen Geheimnisse?'",
+                "Der Wanderer zieht weiter, das Sandkorn im Schuh noch spürbar.",
+                (player) =>
+                {
+                    Console.WriteLine("Wie viele Münzen möchtest du spenden?");
+                    int coins = InputHelper.GetCoins($"Du hast {player.Money} Gold. Gib die Anzahl der Münzen ein:", player.Money);
+
+                    if (coins == 0)
+                    {
+                        DungeonHelper.AddDebuff(player, "Gold", 15, "Der Wanderer ist enttäuscht und klaut dir etwas Gold.");
+                    }
+                    else if (coins <= 20)
+                    {
+                        DungeonHelper.AddBuff(player, "Attack", 2, "Der Wanderer zeigt dir seinen Popcorntrick!");
+                    }
+                    else
+                    {
+                        DungeonHelper.AddBuff(player, "XP", 25, "Der Wanderer ist beeindruckt! Du erhältst eine große Menge XP.");
+                        Level.LvlUpCheck(player);
+                    }
+
+                    player.Money -= coins;
+                }
+            );
+        }
+
+        public static NPC AethraNova()
+        {
+            return new NPC(
+                "Aethra Nova, die Sternenbastlerin",
+                "Aethra streicht mit den Fingern durch die Luft, drei Sternsplitter schweben vor dir.",
+                "Aethra nickt dir zu und verschwindet in den funkelnden Sternen.",
+                (player) =>
+                {
+                    int roll = Random.Shared.Next(3);
+                    if (roll == 0)
+                        DungeonHelper.AddBuff(player, "Attack", 3, "Du berührst den Nova-Splitter und fühlst kosmische Kraft!");
+                    else if (roll == 1)
+                        Console.WriteLine("Der Umbra-Splitter zeigt nichts von Bedeutung.");
+                    else
+                        DungeonHelper.AddDebuff(player, "Attack", 3, "Der Void-Splitter entzieht dir Kraft!");
+                }
+            );
+        }
+
+        public static NPC Gearlos()
+        {
+            return new NPC(
+                "Gearlos, der Flammenrufer-Schmied",
+                "Gearlos schlägt mit wuchtigem Klang auf seinen Amboss: 'Tribut an die Feuergeister!'",
+                "Gearlos nickt kurz, die Funken tanzen weiter.",
+                (player) =>
+                {
+                    Console.WriteLine("Wie viele Münzen möchtest du dem Schmied spenden?");
+                    int coins = InputHelper.GetInt($"Du hast {player.Money} Gold. Gib die Anzahl der Münzen ein:", player.Money);
+
+                    if (coins == 0)
+                        DungeonHelper.AddDebuff(player, "Attack", 2, "Die Feuergeister sind beleidigt! Angriff gesunken.");
+                    else if (coins <= 20)
+                        DungeonHelper.AddBuff(player, "Attack", 3, "Die Feuergeister sind zufrieden. Angriff leicht erhöht.");
+                    else
+                        DungeonHelper.AddBuff(player, "Attack", 5, "Die Feuergeister sind beeindruckt! Angriff stark erhöht.");
+
+                    player.Money -= coins;
+                }
+            );
+        }
+
+        public static NPC Pixelveil()
+        {
+            return new NPC(
+                "Pixelveil, der Maschinensänger",
+                "Pixelveil summt eine komplexe Maschinenmelodie.",
+                "Die Zahnräder verstummen langsam.",
+                (player) =>
+                {
+
+                    if (InputHelper.AskYesNo("Willst du der Maschinenmelodie zuhören?"))
+                    {
+                        DungeonHelper.AddBuff(player, "XP", 10, "Du hast der Melodie gelauscht und Erfahrung gewonnen!");
+                        Level.LvlUpCheck(player);
+                    }
+                    else
+                    {
+                        DungeonHelper.AddDebuff(player, "Crit", 2, "Die dissonante Melodie stört dich, Krit-Chance gesunken.");
+                    }
+                }
+            );
+        }
+
+        public static NPC Cyrilla()
+        {
+            return new NPC(
+                "Cyrilla die Kristallkundige",
+                "Sie führt dich zu einem schimmernden Kristallkreis: 'Berühre einen Kristall, wenn du dich traust.'",
+                "Aethra verlässt dich mit einem rätselhaften Lächeln.",
+                (player) =>
+                {
+                    int roll = Random.Shared.Next(3);
+                    if (roll == 0)
+                        DungeonHelper.AddBuff(player, "Defense", 4, "Der Kristall leuchtet! Verteidigung erhöht.");
+                    else if (roll == 1)
+                        Console.WriteLine("Der Kristall bleibt still, du spürst nichts.");
+                    else
+                        DungeonHelper.AddDebuff(player, "Defense", 3, "Ein dunkler Kristall entzieht dir Kraft!");
+                }
+            );
+        }
+
+        public static NPC Krynn()
+        {
+            return new NPC(
+                "Krynn der Schattenwanderer",
+                "Ein Schatten löst sich von der Wand: 'Ich beobachte dich…'",
+                "Krynn verschwindet wieder in den Schatten.",
+                (player) =>
+                {
+                    int roll = Random.Shared.Next(3);
+                    if (roll == 0)
+                        DungeonHelper.AddBuff(player, "Crit", 5, "Die Schatten geben dir Stärke! Krit-Chance gestiegen.");
+                    else if (roll == 1)
+                        Console.WriteLine("Die Schatten bleiben unauffällig.");
+                    else
+                        DungeonHelper.AddDebuff(player, "Attack", 2, "Die Schatten schwächen dich! Angriff gesunken.");
+                }
+            );
+        }
+
+        public static NPC Shadowveil()
+        {
+            return new NPC(
+                "Shadowveil der Runenmeister",
+                "Shadowveil zeichnet glühende Runen in die Luft: 'Hilf mir, die Rune zu stabilisieren.'",
+                "Die Runen erlöschen langsam.",
+                (player) =>
+                {
+                    if (InputHelper.AskYesNo("Willst du beim Stabilisieren der Rune helfen?"))
+                        DungeonHelper.AddBuff(player, "SpecialPoints", 1, "Die Rune reagiert positiv! SP erhöht.");
+                    else
+                        DungeonHelper.AddDebuff(player, "Defense", 3, "Die Rune flackert unruhig. Verteidigung gesunken.");
+                }
+            );
+        }
+    }
+
+
 }

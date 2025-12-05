@@ -18,10 +18,10 @@ namespace RPG
 
             plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));    // Runde 1 - zusätzliche Heilungsmöglichkeit
             plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));     // Runde 2
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));    // Runde 3
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));    // Runde 3
             plan.Add((DungeonEvent.Monster, DungeonEvent.Shop));        //Runde 4
             plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));    //Runde 5
-          
+
             return plan;
         }
 
@@ -31,7 +31,6 @@ namespace RPG
             List<Campfire> campfires = RandomCampfireW3();
             List<Shop> shops = RandomShopW3();
 
-            int monsterIndex = 0;
             int campIndex = 0;
             int shopIndex = 0;
 
@@ -44,11 +43,14 @@ namespace RPG
 
                 Console.WriteLine($"Runde {round + 1}");
 
+                int leftIndex = round * 2;
+                int rightIndex = round * 2 + 1;
+
                 Console.Write("Linkes Portal ->");
-                PrintEvent(left);
+                PrintEvent(left, leftIndex);
 
                 Console.Write("Rechtes Portal ->");
-                PrintEvent(right);
+                PrintEvent(right, rightIndex);
 
                 Console.WriteLine();
 
@@ -56,20 +58,20 @@ namespace RPG
                 if (choice == 1)
                 {
                     if (left == DungeonEvent.Monster)
-                        BattleSystem.Kampf(held, monsterRooms[0 + round * 2].Monster);
+                        BattleSystem.Kampf(held, monsterRooms[leftIndex].Monster);
                     else if (left == DungeonEvent.Shop)
-                        ShopEvent(shops[0]);
+                        DungeonHelper.ShopEvent(shops[shopIndex]);
                     else if (left == DungeonEvent.Campfire)
-                        CampfireEvent(campfires[0], held);
+                        DungeonHelper.CampfireEvent(campfires[campIndex], held, 18, campIndex);
                 }
                 else
                 {
                     if (right == DungeonEvent.Monster)
-                        BattleSystem.Kampf(held, monsterRooms[1 + round * 2].Monster);
+                        BattleSystem.Kampf(held, monsterRooms[rightIndex].Monster);
                     else if (right == DungeonEvent.Shop)
-                        ShopEvent(shops[0]);
+                        DungeonHelper.ShopEvent(shops[shopIndex]);
                     else if (right == DungeonEvent.Campfire)
-                        CampfireEvent(campfires[0], held);
+                        DungeonHelper.CampfireEvent(campfires[campIndex], held, 18, campIndex);
                 }
 
             }
@@ -80,37 +82,12 @@ namespace RPG
             Console.WriteLine("Du hast Welt 3 gecleart!");
             Console.WriteLine("GAME END");
 
-            void ShopEvent(Shop shop)
-            {
-                foreach (string item in shop.ShopInv)
-                {
-                    int price = Shopping.prices[item];
-                    Console.Write($"{item}: {price} $");
-                }
-            }
-
-            void CampfireEvent(Campfire campfire, BasePlayer player)
-            {
-                Console.WriteLine(campfire.RoomName);
-                Console.WriteLine(campfire.Description);
-                Console.WriteLine($"Du setzt dich eine Weile ans Lagerfeuer. HP {player.Health}");
-                if (player.Health + 15 <= player.MaxHP)
-                {
-                    player.Health += 15;
-                }
-                else
-                {
-                    player.Health = player.MaxHP;
-                }
-                Console.WriteLine($"Du hast dich um 10 HP geheilt. Neue HP:{player.Health} ");
-            }
-
-            void PrintEvent(DungeonEvent evt)
+            void PrintEvent(DungeonEvent evt, int index)
             {
                 switch (evt)
                 {
                     case DungeonEvent.Monster:
-                        Console.WriteLine(monsterRooms[monsterIndex++].RoomName);
+                        Console.WriteLine(monsterRooms[index].RoomName);
                         break;
 
                     case DungeonEvent.Campfire:
@@ -123,6 +100,11 @@ namespace RPG
                 }
             }
         }
+
+
+
+
+
 
         public static List<MonsterRoom> RandomWorld3()
         {

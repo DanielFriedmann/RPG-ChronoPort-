@@ -59,8 +59,8 @@ namespace RPG
         public static Dictionary<string, (int Health,int Level, int XP, int MaxHP, int Attack, int Defense,  int Crit, int SpecialPoints, int MaxSP, string HeroAbility)> raceStats= new()
         {
             {"Krieger", (2000, 1, 0, 2000, 25, 10, 10, 3, 3, "")},
-            {"Magier", (2000, 1, 0 , 50, 26, 10, 15, 5, 5, "")},
-            {"Schurke", (2000, 1, 0, 45, 28, 8, 18, 5, 5, "Verstohlener Dolchstoß")}
+            {"Magier", (2000, 1, 0 , 2000, 26, 10, 15, 5, 5, "")},
+            {"Schurke", (2000, 1, 0, 2000, 28, 8, 18, 5, 5, "Verstohlener Dolchstoß")}
         };
     }
 

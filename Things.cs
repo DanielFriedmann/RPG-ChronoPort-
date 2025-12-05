@@ -185,4 +185,24 @@ namespace RPG
         }
 
     }
+
+    public class NPC
+    {
+        public string Name { get; set; }
+
+        public string WelcomeText { get; set; }
+        
+        public string ByeText { get; set; }
+
+        public Action<BasePlayer> Encounter { get; set; }
+
+        public NPC(string name,  string welcome, string bye, Action<BasePlayer> encounter)
+        {
+            Name = name;
+            WelcomeText = welcome;
+            ByeText = bye;
+            Encounter = encounter;
+        }
+        
+    }
 }
