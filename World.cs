@@ -52,8 +52,6 @@ namespace RPG
         {
             Encounter = encounter ?? new List<string>();
         }
-    }   
-
-    // Boss Klasse
+    }       
 
 }

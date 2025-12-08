@@ -7,7 +7,6 @@ namespace RPG
 {
     public class DungeonHelper
     {
-
         public static List<BasePlayer> hoflist { get; set; } = new List<BasePlayer>();
 
         public static void EncounterMonster(MonsterRoom room)
@@ -142,7 +141,6 @@ namespace RPG
             }
         }
 
-
         public static void AddDebuff(BasePlayer player, string attribute, int value, string eventtext)
         {
             if (attribute == "Attack")
@@ -248,7 +246,7 @@ namespace RPG
             HallofFameLoad();
             HallofFameAdd(player);
             HofSave(hoflist);            //HoF methode
-            //monster counter
+            DeleteSave();               //monster counter
             Console.WriteLine("Drücken Sie Enter um fortzufahren.");
             Console.ReadLine();
             Console.Clear();
@@ -265,6 +263,14 @@ namespace RPG
             File.WriteAllText("savegame.json", json);
         }
 
+        public static void DeleteSave()
+        {
+            if(File.Exists("savegame.json"))
+            {
+                File.Delete("savegame.json");
+                Console.WriteLine("Save File wurde zurückgesetzt.");
+            }
+        }
         public static bool CheckSave()
         {
             if (!File.Exists("savegame.json"))

@@ -11,9 +11,7 @@ namespace RPG
             int lvl5 = 500;
             int lvl6 = 700;
             int lvl7 = 900;
-            int lvl8 = 1200;
-
-            Console.Clear();
+            int lvl8 = 1200;            
 
             if(player.Xp > lvl8 && player.Level < 8)
             {
@@ -121,8 +119,7 @@ namespace RPG
                     Console.WriteLine("Du bist jetzt ein Gieriger Schurke! Spezialfähigkeit bleibt verstohlener Dolchstoß");
                     player.Race = "Gieriger Schurke";
                 }
-            }
-            DungeonHelper.Pause();
+            }            
         }
 
         public static void LvlUpScreen(BasePlayer player)
@@ -179,8 +176,7 @@ namespace RPG
                     }
                     break;
             }
-
-            DungeonHelper.Pause();
+            
         }
     }
 }

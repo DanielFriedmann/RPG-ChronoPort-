@@ -28,13 +28,13 @@ namespace RPG
 
             if (variantA)
             {
-                plan.Add((DungeonEvent.Monster, DungeonEvent.Shop));
-                plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));
+                plan.Add((DungeonEvent.Monster, DungeonEvent.Shop)); // Runde 4
+                plan.Add((DungeonEvent.Monster, DungeonEvent.Monster)); // Runde 5
             }
             else
             {
-                plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));
-                plan.Add((DungeonEvent.Shop, DungeonEvent.Monster));
+                plan.Add((DungeonEvent.Monster, DungeonEvent.Monster)); // Runde 4
+                plan.Add((DungeonEvent.Shop, DungeonEvent.Monster)); // Runde 5
             }
             return plan;
         }
@@ -114,7 +114,7 @@ namespace RPG
                         Console.WriteLine("   /     \\");
                         Console.WriteLine("  /       \\");
                         Console.WriteLine(" /         \\");
-                        Console.WriteLine($"|  {text}    |");
+                        Console.WriteLine($"|   {text}   |");
                         Console.WriteLine("\\           /");
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
@@ -130,7 +130,7 @@ namespace RPG
                         Console.WriteLine("   /     \\");
                         Console.WriteLine("  /       \\");
                         Console.WriteLine(" /         \\");
-                        Console.WriteLine("|  Campfire   |");
+                        Console.WriteLine("|  Campfire  |");
                         Console.WriteLine("\\           /");
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");

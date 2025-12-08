@@ -8,7 +8,6 @@ namespace RPG
             bool taskDone = false;
             do
             {
-
                 Console.Clear();
                 Console.WriteLine("=========================================");
                 Console.Write("------ "); ColorSwitch("Willkommen zu Chrono Port!", ConsoleColor.DarkYellow); Console.WriteLine("------");
@@ -51,7 +50,7 @@ namespace RPG
                         {
                             Console.WriteLine("Es wurde kein Spielstand gefunden...");
                             Console.WriteLine("Kehre zurück zum Menü...");
-                            DungeonHelper.Pause();                            
+                            DungeonHelper.Pause();
                         }
                         break;
 
@@ -71,7 +70,9 @@ namespace RPG
                         taskDone = true;
                         break;
                 }
-            } while(!taskDone);
+
+
+            } while (!taskDone);
 
         }
 
@@ -83,7 +84,7 @@ namespace RPG
             DungeonHelper.Pause();
             Console.WriteLine("Wunderbar, das funktioniert ja schonmal!");
             Console.WriteLine("Möchtest du die Lore erneut lesen? y/n");
-            if(InputHelper.AskYesNo("Möchtest du die Lore erneut lesen?"))
+            if (InputHelper.AskYesNo("Möchtest du die Lore erneut lesen?"))
             {
                 Lore();
             }
@@ -111,21 +112,19 @@ namespace RPG
             Console.WriteLine("Der Einzige, der die Portale betreten kann, ohne darin zu zerbrechen.");
             Console.WriteLine("Das Abenteuer beginnt.....");
             DungeonHelper.Pause();
-            Console.Clear();
         }
         public static void TitleScreen()
         {
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("===================================");
             Console.WriteLine("-----------------------------------");
-            Console.Write("-----------");ColorSwitch("CHRONO-PORT", ConsoleColor.DarkYellow); Console.WriteLine("-------------");
+            Console.Write("-----------"); ColorSwitch("CHRONO-PORT", ConsoleColor.DarkYellow); Console.WriteLine("-------------");
             Console.WriteLine("===================================");
             Console.WriteLine("===== Press any key to start ======");
             Console.WriteLine("===================================");
             Console.WriteLine("===================================");
             Console.ReadKey(); //evtll Titel Melodie
         }
-
         public static void ColorSwitch(string text, ConsoleColor color)
         {
             Console.ForegroundColor = color;

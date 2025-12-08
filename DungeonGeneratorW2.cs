@@ -16,7 +16,7 @@ namespace RPG
         {
             List<(DungeonEvent, DungeonEvent)> plan = new List<(DungeonEvent, DungeonEvent)>();
 
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire)); // Runde 1 - Heilungsmöglichkeit
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Monster)); // Runde 1 
             plan.Add((DungeonEvent.Monster, DungeonEvent.Monster)); // Runde 2
             plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire)); // Runde 3
 
@@ -40,7 +40,7 @@ namespace RPG
             List<MonsterRoom> monsterRooms = RandomWorld2();
             List<Campfire> campfires = RandomCampfireW2();
             List<Shop> shops = RandomShopW2();
-            
+
             int world = 2;
             int campIndex = 0;
             int shopIndex = 0;
@@ -57,10 +57,8 @@ namespace RPG
                 int leftIndex = round * 2;
                 int rightIndex = round * 2 + 1;
 
-                Console.Write("Linkes Portal ->");
                 PrintPortal(left, leftIndex);
 
-                Console.Write("Rechtes Portal ->");
                 PrintPortal(right, rightIndex);
 
                 Console.WriteLine();
@@ -93,13 +91,13 @@ namespace RPG
 
             }
 
-            
+
             BossMonster boss = RandomBossWorld2()[0];
             BossBattle.BossKampf(held, boss, world);
-            DungeonHelper.WorldEndScreen(held, world);   
-            
-          
-              void PrintPortal(DungeonEvent evt, int index)
+            DungeonHelper.WorldEndScreen(held, world);
+
+
+            void PrintPortal(DungeonEvent evt, int index)
             {
                 switch (evt)
                 {
@@ -111,7 +109,7 @@ namespace RPG
                         Console.WriteLine("   /     \\");
                         Console.WriteLine("  /       \\");
                         Console.WriteLine(" /         \\");
-                        Console.WriteLine($"|  {text}    |");
+                        Console.WriteLine($"|   {text}  |");
                         Console.WriteLine("\\           /");
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
@@ -121,13 +119,13 @@ namespace RPG
                         break;
 
                     case DungeonEvent.Campfire:
-                        
+
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("    _____     ");
                         Console.WriteLine("   /     \\");
                         Console.WriteLine("  /       \\");
                         Console.WriteLine(" /         \\");
-                        Console.WriteLine("|  Campfire   |");
+                        Console.WriteLine("|  Campfire  |");
                         Console.WriteLine("\\           /");
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
@@ -139,7 +137,7 @@ namespace RPG
 
                     case DungeonEvent.Shop:
 
-                       Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("    _____     ");
                         Console.WriteLine("   /     \\");
                         Console.WriteLine("  /       \\");

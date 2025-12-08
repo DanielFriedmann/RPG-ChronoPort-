@@ -18,5 +18,25 @@
     "Attack": 33,
     "Defense": 10,
     "Health": 1871
+  },
+  {
+    "Crit": 10,
+    "SpecialPoints": 1,
+    "Xp": 1215,
+    "MaxHP": 2000,
+    "MaxSP": 3,
+    "HeroAbility": "Ansturm der 300 Krieger",
+    "Status": "",
+    "Money": 621,
+    "Race": "Titan",
+    "Inventory": {
+      "ItemsInventory": []
+    },
+    "Progress": 4,
+    "Name": "Daniel",
+    "Level": 8,
+    "Attack": 39,
+    "Defense": 14,
+    "Health": 1888
   }
 ]

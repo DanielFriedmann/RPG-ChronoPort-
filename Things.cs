@@ -32,10 +32,13 @@ namespace RPG
 
         public MonsterDrop Drop { get; set; }
 
+        public int MaxHP { get; set; }
+
         public Monster(string name, int level, int attack, int defense, int health, List<string> attacks, MonsterDrop drop) : base(name, level, attack, defense, health)
         {
             AttackNames = attacks;
             Drop = drop;
+            MaxHP = health;
         }
 
     }
@@ -52,6 +55,8 @@ namespace RPG
 
         public string Defeattext {get; set;}
 
+        public int MaxHP { get; set; }
+
         public BossMonster(string name, int level, int attack, int defense, int health, List<string> attackname, MonsterDrop drop1, MonsterDrop drop2, string encounter, string defeat) 
         : base(name, level, attack, defense, health)
         {
@@ -59,7 +64,8 @@ namespace RPG
             Drop1 = drop1;
             Drop2 = drop2;
             Encountertext = encounter;
-            Defeattext = defeat;            
+            Defeattext = defeat;
+            MaxHP = health;            
         }
     }
 

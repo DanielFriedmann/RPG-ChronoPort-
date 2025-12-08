@@ -16,7 +16,7 @@ namespace RPG
         {
             List<(DungeonEvent, DungeonEvent)> plan = new List<(DungeonEvent, DungeonEvent)>();
 
-            plan.Add((DungeonEvent.Monster, DungeonEvent.Campfire));    // Runde 1 - zusätzliche Heilungsmöglichkeit
+            plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));    // Runde 1
             plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));     // Runde 2
             plan.Add((DungeonEvent.Monster, DungeonEvent.Monster));    // Runde 3
             plan.Add((DungeonEvent.Monster, DungeonEvent.Shop));        //Runde 4
@@ -46,11 +46,8 @@ namespace RPG
 
                 int leftIndex = round * 2;
                 int rightIndex = round * 2 + 1;
-                
-                Console.Write("Linkes Portal ->");
-                PrintPortal(left, leftIndex);
 
-                Console.Write("Rechtes Portal ->");
+                PrintPortal(left, leftIndex);
                 PrintPortal(right, rightIndex);
 
                 Console.WriteLine();
@@ -98,7 +95,7 @@ namespace RPG
                         Console.WriteLine("   /     \\");
                         Console.WriteLine("  /       \\");
                         Console.WriteLine(" /         \\");
-                        Console.WriteLine($"|  {text}    |");
+                        Console.WriteLine($"|   {text}  |");
                         Console.WriteLine("\\           /");
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
@@ -114,7 +111,7 @@ namespace RPG
                         Console.WriteLine("   /     \\");
                         Console.WriteLine("  /       \\");
                         Console.WriteLine(" /         \\");
-                        Console.WriteLine("|  Campfire   |");
+                        Console.WriteLine("|  Campfire  |");
                         Console.WriteLine("\\           /");
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
@@ -144,11 +141,6 @@ namespace RPG
                 }
             }
         }
-
-
-
-
-
 
         public static List<MonsterRoom> RandomWorld3()
         {

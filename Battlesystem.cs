@@ -24,12 +24,12 @@ namespace RPG
             if (player.Health > 0)
             {
                 ClearPlayerStatus(player);
-                DungeonHelper.MonsterDefeat(player, monster);                
+                DungeonHelper.MonsterDefeat(player, monster);
             }
 
             else
             {
-                DungeonHelper.GameOverScreen(player);             
+                DungeonHelper.GameOverScreen(player);
             }
         }
 
@@ -71,6 +71,53 @@ namespace RPG
             }
         }
 
+        public static void DisplayBossHP(BossMonster monster)
+        {
+            int maxHPBlocks = 20;
+            int currentHPBlocks = (int)Math.Round((double)monster.Health / monster.MaxHP * maxHPBlocks);
+            int emptyBlocks = maxHPBlocks - currentHPBlocks;
+
+            string hpBar = new string('|', currentHPBlocks) + new string(' ', emptyBlocks);
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(monster.Name);
+            Console.ResetColor();
+            Console.Write("[");
+            Menu.ColorSwitch(hpBar, ConsoleColor.Red);
+            Console.WriteLine($"] {monster.Health}/{monster.MaxHP} HP");
+        }
+        public static void DisplayMonsterHP(Monster monster)
+        {
+            int maxHPBlocks = 20;
+            int currentHPBlocks = (int)Math.Round((double)monster.Health / monster.MaxHP * maxHPBlocks);
+            int emptyBlocks = maxHPBlocks - currentHPBlocks;
+
+            string hpBar = new string('|', currentHPBlocks) + new string(' ', emptyBlocks);
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(monster.Name);
+            Console.ResetColor();
+            Console.Write("[");
+            Menu.ColorSwitch(hpBar, ConsoleColor.Red);
+            Console.WriteLine($"] {monster.Health}/{monster.MaxHP} HP");
+        }
+
+        public static void DisplayHPSP(BasePlayer player)
+        {
+            int maxHPBlocks = 20;
+            int currentHPBlocks = (int)Math.Round((double)player.Health / player.MaxHP * maxHPBlocks);
+            int emptyBlocks = maxHPBlocks - currentHPBlocks;
+
+            string hpBar = new string('|', currentHPBlocks) + new string(' ', emptyBlocks);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(player.Name);
+            Console.ResetColor();
+            Console.Write("[");
+            Menu.ColorSwitch(hpBar, ConsoleColor.Red);
+            Console.WriteLine($"] {player.Health}/{player.MaxHP} HP");
+            Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP}");
+        }
         public static void PlayerTurn(BasePlayer player, Monster monster)
         {
             string special = "Spezialangriff";
@@ -85,9 +132,13 @@ namespace RPG
             }
             else
             {
-
+                DisplayMonsterHP(monster);
+                Console.WriteLine("----------------------------------------------");
                 Console.WriteLine($"\n1.Angriff\t\t2.{special}");
-                Console.WriteLine("3.Blocken\t\t4.Inventar öffnen");
+                Console.WriteLine("3.Blocken\t\t4.Inventar öffnen TBD");
+                Console.WriteLine("-----------------------------------------------");
+                DisplayHPSP(player);
+                Console.WriteLine();
 
                 int userchoice = InputHelper.GetInt("Wähle eine Aktion aus:", 4);
 
@@ -317,7 +368,7 @@ namespace RPG
                 if (monster.Health <= 0)
                     break;
 
-                BossMonsterTurn(player, monster);                
+                BossMonsterTurn(player, monster);
             }
 
             if (player.Health > 0)
@@ -384,9 +435,13 @@ namespace RPG
 
             else
             {
-
-                Console.WriteLine($"\n1. Angriff\t\t2. {special}");
-                Console.WriteLine("3. Blocken\t\t4. Inventar öffnen");
+                BattleSystem.DisplayBossHP(monster);
+                Console.WriteLine("----------------------------------------");
+                Console.WriteLine($"1. Angriff\t\t2. {special}");
+                Console.WriteLine("3. Blocken\t\t4. Inventar öffnen TBD");
+                Console.WriteLine("----------------------------------------");
+                BattleSystem.DisplayHPSP(player);
+                Console.WriteLine();
 
                 int userchoice = InputHelper.GetInt("Wähle eine Aktion aus:", 4);
 
