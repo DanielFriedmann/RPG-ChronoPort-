@@ -46,9 +46,7 @@ namespace RPG
 
                 int leftIndex = round * 2;
                 int rightIndex = round * 2 + 1;
-
-                //Portalmethode implementieren
-
+                
                 Console.Write("Linkes Portal ->");
                 PrintPortal(left, leftIndex);
 
