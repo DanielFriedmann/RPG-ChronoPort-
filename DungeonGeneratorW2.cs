@@ -58,14 +58,14 @@ namespace RPG
                 int rightIndex = round * 2 + 1;
 
                 Console.Write("Linkes Portal ->");
-                PrintEvent(left, leftIndex);
+                PrintPortal(left, leftIndex);
 
                 Console.Write("Rechtes Portal ->");
-                PrintEvent(right, rightIndex);
+                PrintPortal(right, rightIndex);
 
                 Console.WriteLine();
 
-                int choice = InputHelper.GetInt("Wählen sie links (1) oder rechts (2)", 2);
+                int choice = InputHelper.GetInt("Wähle oberes Portal (1) oder unteres Portal (2)", 2);
                 if (choice == 1)
                 {
                     if (left == DungeonEvent.Monster)
@@ -99,19 +99,59 @@ namespace RPG
             DungeonHelper.WorldEndScreen(held, world);   
             
           
-            void PrintEvent(DungeonEvent evt, int index)
+              void PrintPortal(DungeonEvent evt, int index)
             {
                 switch (evt)
                 {
                     case DungeonEvent.Monster:
-                        Console.WriteLine(monsterRooms[index].RoomName);
+                        string text = monsterRooms[index].RoomName;
+
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("    _____     ");
+                        Console.WriteLine("   /     \\");
+                        Console.WriteLine("  /       \\");
+                        Console.WriteLine(" /         \\");
+                        Console.WriteLine($"|  {text}    |");
+                        Console.WriteLine("\\           /");
+                        Console.WriteLine(" \\         /");
+                        Console.WriteLine("  \\       /");
+                        Console.WriteLine("   \\_____/");
+                        Console.WriteLine();
+                        Console.ResetColor();
                         break;
 
                     case DungeonEvent.Campfire:
+                        
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("    _____     ");
+                        Console.WriteLine("   /     \\");
+                        Console.WriteLine("  /       \\");
+                        Console.WriteLine(" /         \\");
+                        Console.WriteLine("|  Campfire   |");
+                        Console.WriteLine("\\           /");
+                        Console.WriteLine(" \\         /");
+                        Console.WriteLine("  \\       /");
+                        Console.WriteLine("   \\_____/");
                         Console.WriteLine(campfires[campIndex++].RoomName);
+                        Console.WriteLine();
+                        Console.ResetColor();
                         break;
 
                     case DungeonEvent.Shop:
+
+                       Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("    _____     ");
+                        Console.WriteLine("   /     \\");
+                        Console.WriteLine("  /       \\");
+                        Console.WriteLine(" /         \\");
+                        Console.WriteLine("|    Shop    |");
+                        Console.WriteLine("\\           /");
+                        Console.WriteLine(" \\         /");
+                        Console.WriteLine("  \\       /");
+                        Console.WriteLine("   \\_____/");
+                        Console.WriteLine(campfires[campIndex++].RoomName);
+                        Console.WriteLine();
+                        Console.ResetColor();
                         Console.WriteLine(shops[shopIndex++].RoomName);
                         break;
                 }

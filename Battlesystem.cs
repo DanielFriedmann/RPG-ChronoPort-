@@ -24,13 +24,13 @@ namespace RPG
             if (player.Health > 0)
             {
                 ClearPlayerStatus(player);
-                DungeonHelper.MonsterDefeat(player, monster);
-                DungeonHelper.Pause();
+                DungeonHelper.MonsterDefeat(player, monster);                
             }
 
             else
-                Console.WriteLine("Spieler wurde besiegt...");
-                DungeonHelper.Pause(); // GameOver
+            {
+                DungeonHelper.GameOverScreen(player);             
+            }
         }
 
         public static void MonsterTurn(BasePlayer player, Monster monster)
@@ -302,7 +302,7 @@ namespace RPG
     {
         public static void BossKampf(BasePlayer player, BossMonster monster, int world)
         {
-            Console.WriteLine("Du stehst vor einem großen Portal... Du gehst hindurch...");
+            Console.WriteLine("\nDu stehst vor einem großen Portal... Du gehst hindurch...");
             DungeonHelper.Pause();
             Console.WriteLine(monster.Encountertext);
             DungeonHelper.Pause();
@@ -317,8 +317,7 @@ namespace RPG
                 if (monster.Health <= 0)
                     break;
 
-                BossMonsterTurn(player, monster);
-                DungeonHelper.Pause();
+                BossMonsterTurn(player, monster);                
             }
 
             if (player.Health > 0)
@@ -328,7 +327,7 @@ namespace RPG
             }
             else
             {
-                Console.WriteLine("Spieler wurde besiegt..."); // GameOver
+                DungeonHelper.GameOverScreen(player);
             }
         }
 
@@ -475,4 +474,5 @@ namespace RPG
             return MonsterAttackLibrary.MonsterAttacks[attackName];
         }
     }
+
 }

@@ -38,14 +38,14 @@ namespace RPG
             }
             return plan;
         }
-      
+
         public static void GenerateDungeonW1(BasePlayer held)
         {
             List<MonsterRoom> monsterRooms = RandomWorld1();
             List<Campfire> campfires = RandomCampfireW1();
             List<Shop> shops = RandomShopW1();
 
-            int world = 1;            
+            int world = 1;
             int campIndex = 0;
             int shopIndex = 0;
 
@@ -61,16 +61,14 @@ namespace RPG
 
                 int leftIndex = round * 2;
                 int rightIndex = round * 2 + 1;
-
-                Console.Write("Linkes Portal ->");
-                PrintEvent(left, leftIndex);
-
-                Console.Write("Rechtes Portal ->");
-                PrintEvent(right, rightIndex);
+                
+                PrintPortal(left, leftIndex);
+               
+                PrintPortal(right, rightIndex);
 
                 Console.WriteLine();
 
-                int choice = InputHelper.GetInt("Wählen sie links (1) oder rechts (2)", 2);
+                int choice = InputHelper.GetInt("Wähle oberes Portal (1) oder unteres Portal (2)", 2);
                 if (choice == 1)
                 {
                     if (left == DungeonEvent.Monster)
@@ -100,24 +98,63 @@ namespace RPG
 
             BossMonster boss = RandomBossWorld1()[0];
             BossBattle.BossKampf(held, boss, world);
-            DungeonHelper.WorldEndScreen(held, world);       
-            
+            DungeonHelper.WorldEndScreen(held, world);
 
-            
 
-            void PrintEvent(DungeonEvent evt, int index)
+
+            void PrintPortal(DungeonEvent evt, int index)
             {
                 switch (evt)
                 {
                     case DungeonEvent.Monster:
-                        Console.WriteLine(monsterRooms[index].RoomName);
+                        string text = monsterRooms[index].RoomName;
+
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("    _____     ");
+                        Console.WriteLine("   /     \\");
+                        Console.WriteLine("  /       \\");
+                        Console.WriteLine(" /         \\");
+                        Console.WriteLine($"|  {text}    |");
+                        Console.WriteLine("\\           /");
+                        Console.WriteLine(" \\         /");
+                        Console.WriteLine("  \\       /");
+                        Console.WriteLine("   \\_____/");
+                        Console.WriteLine();
+                        Console.ResetColor();
                         break;
 
                     case DungeonEvent.Campfire:
+                        
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("    _____     ");
+                        Console.WriteLine("   /     \\");
+                        Console.WriteLine("  /       \\");
+                        Console.WriteLine(" /         \\");
+                        Console.WriteLine("|  Campfire   |");
+                        Console.WriteLine("\\           /");
+                        Console.WriteLine(" \\         /");
+                        Console.WriteLine("  \\       /");
+                        Console.WriteLine("   \\_____/");
                         Console.WriteLine(campfires[campIndex++].RoomName);
+                        Console.WriteLine();
+                        Console.ResetColor();
                         break;
 
                     case DungeonEvent.Shop:
+
+                       Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("    _____     ");
+                        Console.WriteLine("   /     \\");
+                        Console.WriteLine("  /       \\");
+                        Console.WriteLine(" /         \\");
+                        Console.WriteLine("|    Shop    |");
+                        Console.WriteLine("\\           /");
+                        Console.WriteLine(" \\         /");
+                        Console.WriteLine("  \\       /");
+                        Console.WriteLine("   \\_____/");
+                        Console.WriteLine(campfires[campIndex++].RoomName);
+                        Console.WriteLine();
+                        Console.ResetColor();
                         Console.WriteLine(shops[shopIndex++].RoomName);
                         break;
                 }
@@ -148,7 +185,7 @@ namespace RPG
 
         public static List<BossMonster> RandomBossWorld1()
         {
-            List<BossMonster> roomList = new List<BossMonster> ()
+            List<BossMonster> roomList = new List<BossMonster>()
             {
                 BossFactory.ChronoRex(),
                 BossFactory.RiftMammut(),

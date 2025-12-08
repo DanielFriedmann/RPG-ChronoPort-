@@ -13,6 +13,8 @@ namespace RPG
             int lvl7 = 900;
             int lvl8 = 1200;
 
+            Console.Clear();
+
             if(player.Xp > lvl8 && player.Level < 8)
             {
                 player.Level = 8;
@@ -55,7 +57,9 @@ namespace RPG
                 player.Level = 2;
                 Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
                 LvlUpScreen(player);
-            }         
+            } 
+
+            DungeonHelper.Pause();        
         }
 
 
@@ -118,10 +122,12 @@ namespace RPG
                     player.Race = "Gieriger Schurke";
                 }
             }
+            DungeonHelper.Pause();
         }
 
         public static void LvlUpScreen(BasePlayer player)
         {
+            Console.Clear();
             Console.WriteLine("Du hast einen Skillpunkt erhalten!");
             Console.WriteLine("---------------------------------------------------------------");
             Console.WriteLine($"1. Attack: {player.Attack}");
@@ -173,6 +179,8 @@ namespace RPG
                     }
                     break;
             }
+
+            DungeonHelper.Pause();
         }
     }
 }

@@ -2,7 +2,7 @@ namespace RPG
 {
     public class Creature
     {
-        public string Name { get; set; }
+        public string? Name { get; set; } 
 
         public int Level { get; set; }
 
@@ -11,6 +11,8 @@ namespace RPG
         public int Defense { get; set; }
 
         public int Health { get; set; }
+
+        public Creature() {}
 
         public Creature(string name, int level, int attack, int defense, int health)
         {
@@ -128,17 +130,19 @@ namespace RPG
 
         public int MaxSP { get; set; }
 
-        public string HeroAbility { get; set; }
+        public string HeroAbility { get; set; }  = "";
 
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         public int Money { get; set; }
 
-        public string Race { get; set; }
+        public string? Race { get; set; }
 
-        public Inventory Inventory { get; set; }
+        public Inventory? Inventory { get; set; }
 
         public int Progress { get; set; }
+
+        public BasePlayer() { } 
         
 
         public BasePlayer(string name, int level, int xp, int maxhp, int attack, int defense,
@@ -164,6 +168,8 @@ namespace RPG
     public class Inventory
     {
         public List<string> ItemsInventory { get; set; } = new List<string>();
+
+        public Inventory() {}
 
         public Inventory(List<string> items)
         {

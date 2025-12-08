@@ -20,11 +20,12 @@ namespace RPG
                 Console.WriteLine("----- 5. Beenden -----");
                 Console.WriteLine("==========================================");
 
-                int choice = InputHelper.GetInt("----- Treffen sie eine Auswahl. -----", 4);
+                int choice = InputHelper.GetInt("----- Treffen sie eine Auswahl. -----", 5);
 
                 switch (choice)
                 {
                     case 1:
+                        Lore();
                         BasePlayer held = HeroFactory.CreatePlayer();
                         DungeonGenerator.GenerateDungeonW1(held);
                         DungeonGenerator2.GenerateDungeonW2(held);
@@ -38,6 +39,7 @@ namespace RPG
                             if (hero.Progress == 2)
                             {
                                 DungeonGenerator2.GenerateDungeonW2(hero);
+                                DungeonGenerator3.GenerateDungeonW3(hero);
                             }
                             else
                             {
@@ -59,7 +61,7 @@ namespace RPG
                         break;
 
                     case 4:
-                        Console.WriteLine();
+                        Info();
                         break;
 
                     case 5:
@@ -73,6 +75,44 @@ namespace RPG
 
         }
 
+        public static void Info()
+        {
+            Console.Clear();
+            Console.WriteLine("============================= INFO ========================================");
+            Console.WriteLine(" ▼ <= Das ist das WeiterSymbol. Drücke beliebige Taste um Weiterzumachen.");
+            DungeonHelper.Pause();
+            Console.WriteLine("Wunderbar, das funktioniert ja schonmal!");
+            Console.WriteLine("Möchtest du die Lore erneut lesen? y/n");
+            if(InputHelper.AskYesNo("Möchtest du die Lore erneut lesen?"))
+            {
+                Lore();
+            }
+        }
+
+        public static void Lore()
+        {
+            Console.WriteLine("Einst war die Welt im Gleichgewicht.");
+            Console.WriteLine("Vergangenheit, Gegenwart und Zukunft flossen in geordneten Bahnen nebeneinander her.");
+            Console.WriteLine("Doch dann… kam die Zersplitterung.");
+            DungeonHelper.Pause();
+            Console.WriteLine("Eine uralte, namenlose Macht durchbrach die Grenzen der Zeit.");
+            Console.WriteLine("Zeitlinien kollidierten, Realitäten verschmolzen -");
+            Console.WriteLine("und überall auf der Welt öffneten sich Portale in fremde Epochen und Universen.");
+            DungeonHelper.Pause();
+            Console.WriteLine("Ritter kämpfen neben Maschinen.");
+            Console.WriteLine("Magie trifft auf Technologie.");
+            Console.WriteLine("Vergangene Imperien erwachen während die Zukunft zerfällt");
+            DungeonHelper.Pause();
+            Console.WriteLine("Doch es gibt Hoffnung.");
+            Console.WriteLine("Drei uralte Artefakte der Ordnung, verloren in den zerrissenen Welten,");
+            Console.WriteLine("sind der einzige Schlüssel, um die Zeit wieder zu heilen.");
+            DungeonHelper.Pause();
+            Console.WriteLine("Du bist der letzte Wanderer zwischen den Welten.");
+            Console.WriteLine("Der Einzige, der die Portale betreten kann, ohne darin zu zerbrechen.");
+            Console.WriteLine("Das Abenteuer beginnt.....");
+            DungeonHelper.Pause();
+            Console.Clear();
+        }
         public static void TitleScreen()
         {
             Console.WriteLine("-----------------------------------");

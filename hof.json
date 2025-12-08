@@ -1,0 +1,22 @@
+[
+  {
+    "Crit": 15,
+    "SpecialPoints": 2,
+    "Xp": 1315,
+    "MaxHP": 2000,
+    "MaxSP": 6,
+    "HeroAbility": "Genkidama",
+    "Status": "",
+    "Money": 590,
+    "Race": "Sayajin",
+    "Inventory": {
+      "ItemsInventory": []
+    },
+    "Progress": 4,
+    "Name": "Daniel the dude",
+    "Level": 8,
+    "Attack": 33,
+    "Defense": 10,
+    "Health": 1871
+  }
+]

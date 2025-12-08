@@ -58,6 +58,8 @@ namespace RPG
                 int price = Shopping.prices[item];
                 Console.Write($"{item}: {price} $");
             }
+            Pause();
+            Console.Clear();
         }
 
         public static void CampfireEvent(Campfire campfire, BasePlayer player, int value, int campindex)
@@ -87,6 +89,8 @@ namespace RPG
             Console.WriteLine(npc.ByeText);
 
             Console.WriteLine("Du packst deine Sachen und machst dich wieder auf den Weg.");
+            Pause();
+            Console.Clear();
 
         }
 
@@ -264,9 +268,9 @@ namespace RPG
         public static bool CheckSave()
         {
             if (!File.Exists("savegame.json"))
-                return true;
-            else
                 return false;
+            else
+                return true;
         }
 
         public static BasePlayer LoadPlayer()
@@ -295,6 +299,7 @@ namespace RPG
             else
             {
                 Console.WriteLine("Es gibt noch keine Einträge in der Hall of Fame!");
+                Pause();
                 hoflist = new List<BasePlayer>();
             }
         }
@@ -318,8 +323,8 @@ namespace RPG
         {
                for (int i = 0; i < hoflist.Count; i++)
                     {
-                        BasePlayer player = DungeonHelper.hoflist[i];
-                        Console.WriteLine($"================ {i + 1}. =========================");
+                        BasePlayer player = hoflist[i];
+                        Console.WriteLine($"================ {i + 1}. =============================");
                         Console.WriteLine($"Spieler: {player.Name}");
                         Console.WriteLine($"Rasse: {player.Race}");
                         Console.WriteLine($"Ability: {player.HeroAbility}");
@@ -330,17 +335,15 @@ namespace RPG
                         Console.WriteLine($"Crit: {player.Crit}%");
                         Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP} SP");
                         Console.WriteLine("=====================================================");
-                        Console.WriteLine($"================={i+1}/{hoflist.Count} ==================");
+                        Console.WriteLine($"================= {i+1}/{hoflist.Count} ==================");
                         Console.WriteLine("======== Fortfahren mit beliebiger Taste... ");
                         Pause();
                     }
         }
-        
-        // pause methoden einsetzen.
-
+               
         public static void Pause()
         {
-            Console.Write(" ▼ ");
+            Console.WriteLine(" ▼ Weiter ▼ ");
             Console.ReadKey(true);
         }
 
@@ -349,5 +352,22 @@ namespace RPG
             Thread.Sleep(time);
         }
 
+        public static void GameOverScreen(BasePlayer player)
+        {
+            Console.Clear();
+            Console.WriteLine("======================================");
+            Console.WriteLine("======================================");
+            Console.WriteLine($"======== {player.Name} ist gefallen =========");
+            Console.WriteLine("======================================");
+            Console.WriteLine("Das RaumZeit Loch breitet sich immer weiter aus");
+            Console.WriteLine("Totales Chaos verschlingt die Welten");
+            Console.WriteLine("======================================");
+            Pause();
+            Console.WriteLine("Die Welt und auch dieses Spiel wurden zerstört.");
+            Console.WriteLine("In fernen Äonen wird womöglich jemend erneut geboren.");
+            Pause();
+            Environment.Exit(0);
+        }
+        
     }
 }
