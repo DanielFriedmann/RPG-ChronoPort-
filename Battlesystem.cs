@@ -7,25 +7,30 @@ namespace RPG
         {
 
             Console.WriteLine($"Kampf gestartet: {player.Name} VS {monster.Name}");
+            DungeonHelper.Pause();
 
             while (player.Health > 0 && monster.Health > 0)
             {
                 PlayerTurn(player, monster);
+                DungeonHelper.Pause();
 
                 if (monster.Health <= 0)
                     break;
 
                 MonsterTurn(player, monster);
+                DungeonHelper.Pause();
             }
 
             if (player.Health > 0)
             {
                 ClearPlayerStatus(player);
                 DungeonHelper.MonsterDefeat(player, monster);
+                DungeonHelper.Pause();
             }
 
             else
-                Console.WriteLine("Spieler wurde besiegt..."); // GameOver
+                Console.WriteLine("Spieler wurde besiegt...");
+                DungeonHelper.Pause(); // GameOver
         }
 
         public static void MonsterTurn(BasePlayer player, Monster monster)
@@ -298,17 +303,22 @@ namespace RPG
         public static void BossKampf(BasePlayer player, BossMonster monster, int world)
         {
             Console.WriteLine("Du stehst vor einem großen Portal... Du gehst hindurch...");
+            DungeonHelper.Pause();
             Console.WriteLine(monster.Encountertext);
+            DungeonHelper.Pause();
             Console.WriteLine($"Kampf gestartet: {player.Name} VS {monster.Name}");
+            DungeonHelper.Pause();
 
             while (player.Health > 0 && monster.Health > 0)
             {
                 BossPlayerTurn(player, monster);
+                DungeonHelper.Pause();
 
                 if (monster.Health <= 0)
                     break;
 
                 BossMonsterTurn(player, monster);
+                DungeonHelper.Pause();
             }
 
             if (player.Health > 0)
@@ -326,6 +336,7 @@ namespace RPG
         {
             AttackMonster monsterAttack = BossAttackRandomizer(monster);
             Console.WriteLine($"{monster.Name} greift mit {monsterAttack.AttackName} an.");
+            DungeonHelper.Pause();
 
             if (BattleSystem.DoesHit(monsterAttack.AttackAccuracy, player)) //inkl. stealth check
             {
@@ -368,6 +379,7 @@ namespace RPG
             if (BattleSystem.CheckStatusPlayer(player) == 1) // Stun Check inkludiert
             {
                 Console.WriteLine("Du bist noch stunned! Du kannst diese Runde nicht angreifen!");
+                DungeonHelper.Pause();
                 player.Status = "";
             }
 

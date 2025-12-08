@@ -1,9 +1,14 @@
 using System.Collections.Concurrent;
+using System.Text.Json;
+using System.IO;
+
 
 namespace RPG
 {
     public class DungeonHelper
     {
+
+        public static List<BasePlayer> hoflist { get; set; } = new List<BasePlayer>();
 
         public static void EncounterMonster(MonsterRoom room)
         {
@@ -42,6 +47,7 @@ namespace RPG
             Console.WriteLine($"{monster.Name} hat Loot gedroppt!");
             Console.WriteLine($"Du erhältst {monster.Drop1.DropItem} und hast damit {world} von 3 Artefakten um die Welt wieder ins Lot zu bringen!");
             Console.WriteLine($"Du erhältst {monster.Drop2.DropItem}!");
+            player.Progress = world + 1;   //Alternative zu World Artefakten um den Progress zu überprüfen.
             Level.LvlUpCheck(player);
         }
 
@@ -170,15 +176,21 @@ namespace RPG
         {
             Console.WriteLine($"Glückwunsch, {player.Name} du hast Welt {world} geschafft!");
             int choice = InputHelper.GetInt("Was möchtest du tun?\n1.Nächste Welt\n2.Speichern und Beenden", 2);
-            if(choice == 1)
+            if (choice == 1)
             {
                 Console.WriteLine($"Weiter gehts mit Welt {world + 1}!");
                 return;
             }
             else
             {
-                Console.WriteLine("Spiel wird gespeichert... TBD");
-                //dungeon save methode
+                Console.WriteLine("Spiel wird gespeichert...");
+                Pause();
+                SaveGame(player);
+                Console.WriteLine("Spiel wurde erfolgreich gespeichert!");
+                Pause();
+                Console.WriteLine("Beenden...");
+                PauseTime(2000);
+                Environment.Exit(0);
             }
 
 
@@ -209,9 +221,9 @@ namespace RPG
         {
             Console.WriteLine($"{credit}: Daniel Friedmann");
             Thread.Sleep(1000);
-            Console.WriteLine();            
+            Console.WriteLine();
         }
-        
+
         public static void FinalScreen(BasePlayer player)
         {
             EndLore();
@@ -229,21 +241,106 @@ namespace RPG
             Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP} SP");
             Console.WriteLine("====================================================");
             Console.WriteLine($"Der Held {player.Name} wurde der Hall of Fame hinzugefügt!");
-            //HoF methode
+            HallofFameLoad();
+            HallofFameAdd(player);
+            HofSave(hoflist);            //HoF methode
             //monster counter
             Console.WriteLine("Drücken Sie Enter um fortzufahren.");
             Console.ReadLine();
             Console.Clear();
-            Credits();        
-        }        
-        
-        // hall of fame
+            Credits();
+        }
 
-        // pause methoden etablieren
+        public static void SaveGame(BasePlayer player)
+        {
+            string json = JsonSerializer.Serialize(player, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+
+            File.WriteAllText("savegame.json", json);
+        }
+
+        public static bool CheckSave()
+        {
+            if (!File.Exists("savegame.json"))
+                return true;
+            else
+                return false;
+        }
+
+        public static BasePlayer LoadPlayer()
+        {
+            string json = File.ReadAllText("savegame.json");
+            BasePlayer? player = JsonSerializer.Deserialize<BasePlayer>(json);
+
+            if(player == null)
+            {
+                Console.WriteLine("Fehler, es wurde kein Spieler gefunden.");
+                Pause();
+                player = HeroFactory.CreatePlayer();
+            }
+
+            return player;
+        }
+
+        public static void HallofFameLoad()
+        {
+            if(File.Exists("hof.json"))
+            {
+                string json = File.ReadAllText("hof.json");
+                hoflist = JsonSerializer.Deserialize<List<BasePlayer>>(json) ?? new List<BasePlayer>();
+            }
+
+            else
+            {
+                Console.WriteLine("Es gibt noch keine Einträge in der Hall of Fame!");
+                hoflist = new List<BasePlayer>();
+            }
+        }
+
+        public static void HallofFameAdd(BasePlayer player)
+        {
+            hoflist.Add(player);
+        }
+
+        public static void HofSave(List<BasePlayer >hoflist)
+        {
+             string json = JsonSerializer.Serialize(hoflist, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+
+            File.WriteAllText("hof.json", json);
+        }
+
+        public static void HofShow()
+        {
+               for (int i = 0; i < hoflist.Count; i++)
+                    {
+                        BasePlayer player = DungeonHelper.hoflist[i];
+                        Console.WriteLine($"================ {i + 1}. =========================");
+                        Console.WriteLine($"Spieler: {player.Name}");
+                        Console.WriteLine($"Rasse: {player.Race}");
+                        Console.WriteLine($"Ability: {player.HeroAbility}");
+                        Console.WriteLine($"===================================================");
+                        Console.WriteLine($"Health: {player.Health}/{player.MaxHP} HP");
+                        Console.WriteLine($"Attack: {player.Attack}");
+                        Console.WriteLine($"Defense: {player.Defense}");
+                        Console.WriteLine($"Crit: {player.Crit}%");
+                        Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP} SP");
+                        Console.WriteLine("=====================================================");
+                        Console.WriteLine($"================={i+1}/{hoflist.Count} ==================");
+                        Console.WriteLine("======== Fortfahren mit beliebiger Taste... ");
+                        Pause();
+                    }
+        }
+        
+        // pause methoden einsetzen.
 
         public static void Pause()
         {
-            Console.Write(" ➤ ");
+            Console.Write(" ▼ ");
             Console.ReadKey(true);
         }
 
