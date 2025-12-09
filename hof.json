@@ -58,5 +58,45 @@
     "Attack": 32,
     "Defense": 9,
     "Health": 91
+  },
+  {
+    "Crit": 7,
+    "SpecialPoints": 1,
+    "Xp": 850,
+    "MaxHP": 250,
+    "MaxSP": 4,
+    "HeroAbility": "Genkidama",
+    "Status": "",
+    "Money": 467,
+    "Race": "Sayajin",
+    "Inventory": {
+      "ItemsInventory": []
+    },
+    "Progress": 4,
+    "Name": "Dimitri der Vulkanzerst\u00F6rer",
+    "Level": 7,
+    "Attack": 38,
+    "Defense": 10,
+    "Health": 161
+  },
+  {
+    "Crit": 9,
+    "SpecialPoints": 1,
+    "Xp": 855,
+    "MaxHP": 220,
+    "MaxSP": 4,
+    "HeroAbility": "Schwarze Magie",
+    "Status": "",
+    "Money": 596,
+    "Race": "Dunkler Magier",
+    "Inventory": {
+      "ItemsInventory": []
+    },
+    "Progress": 4,
+    "Name": "Danny420",
+    "Level": 7,
+    "Attack": 34,
+    "Defense": 10,
+    "Health": 89
   }
 ]

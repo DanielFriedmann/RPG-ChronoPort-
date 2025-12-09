@@ -12,6 +12,7 @@ namespace RPG
 
         public static void EncounterMonster(MonsterRoom room)
         {
+            Console.Clear();
             Console.WriteLine($"Du findest dich im Jahr {room.RoomName} wieder!");
             Console.WriteLine(room.Description);
             Console.WriteLine(room.EncounterDescription1);
@@ -54,6 +55,10 @@ namespace RPG
 
         public static void ShopEvent(Shop shop)
         {
+            Console.Clear();
+            Menu.ColorSwitch(shop.RoomName, ConsoleColor.DarkYellow);
+            Console.WriteLine();
+
             foreach (string item in shop.ShopInv)
             {
                 int price = Shopping.prices[item];
@@ -65,8 +70,9 @@ namespace RPG
         public static void CampfireEvent(Campfire campfire, BasePlayer player, int value, int campindex)
         {
             Random random = new Random();
-
-            Console.WriteLine(campfire.RoomName);
+            Console.Clear();
+            Menu.ColorSwitch(campfire.RoomName, ConsoleColor.DarkGreen);
+            Console.WriteLine();
             Console.WriteLine(campfire.Description);
             Console.WriteLine($"Du setzt dich eine Weile ans Lagerfeuer. HP {player.Health}");
             if (player.Health + value <= player.MaxHP)
@@ -223,6 +229,7 @@ namespace RPG
 
         public static void Credits()
         {
+            Console.Clear();
             Console.WriteLine("Das war CHRONO-PORT");
             Console.WriteLine();
             CreditHelper("Entwickler");
@@ -245,6 +252,7 @@ namespace RPG
         public static void FinalScreen(BasePlayer player)
         {
             EndLore();
+            Console.Clear();
             Console.WriteLine("Herzlichen Glückwunsch! Du hast das Spiel beendet!");
             Console.WriteLine("====================================================");
             Console.WriteLine($"Spieler: {player.Name}");

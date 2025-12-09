@@ -52,13 +52,15 @@ namespace RPG
 
             List<(DungeonEvent, DungeonEvent)> plan = CreateDungeonPlanW1();
 
-            Console.WriteLine("Willkommen in Welt 1!");
+            Console.WriteLine($"Willkommen in Welt {world}!");
+            DungeonHelper.Pause();
 
             for (int round = 0; round < plan.Count; round++)
             {
                 var (left, right) = plan[round];
 
-                Console.WriteLine($"Runde {round + 1}");
+                Console.Clear();
+                Menu.ColorSwitch($"Runde {round + 1}\n", ConsoleColor.DarkGreen);                
 
                 int leftIndex = round * 2;
                 int rightIndex = round * 2 + 1;

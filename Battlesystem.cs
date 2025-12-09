@@ -20,6 +20,7 @@ namespace RPG
 
                 MonsterTurn(player, monster);
                 DungeonHelper.Pause();
+                Console.Clear();
             }
 
             if (player.Health > 0)
@@ -99,7 +100,7 @@ namespace RPG
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.Write(monster.Name);
             Console.ResetColor();
-            Console.WriteLine($"LVL:    {monster.Level}");
+            Console.WriteLine($"      LVL:{monster.Level}");
             Console.Write("[");
             Menu.ColorSwitch(hpBar, ConsoleColor.Red);
             Console.WriteLine($"] {monster.Health}/{monster.MaxHP} HP");
@@ -358,8 +359,22 @@ namespace RPG
         //Klasse für Kämpfe mit Bossen
         public static void BossKampf(BasePlayer player, BossMonster monster, int world)
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("    _____     ");
+            Console.WriteLine("   /     \\");
+            Console.WriteLine("  /       \\");
+            Console.WriteLine(" /         \\");
+            Console.WriteLine("|            |");
+            Console.WriteLine("\\           /");
+            Console.WriteLine(" \\         /");
+            Console.WriteLine("  \\       /");
+            Console.WriteLine("   \\_____/");
+            Console.WriteLine();
+            Console.ResetColor();
             Console.WriteLine("\nDu stehst vor einem großen Portal... Du gehst hindurch...");
             DungeonHelper.Pause();
+            Console.Clear();
             Console.WriteLine(monster.Encountertext);
             DungeonHelper.Pause();
             Console.WriteLine($"Kampf gestartet: {player.Name} VS {monster.Name}");
@@ -374,6 +389,8 @@ namespace RPG
                     break;
 
                 BossMonsterTurn(player, monster);
+                DungeonHelper.Pause();
+                Console.Clear();
             }
 
             if (player.Health > 0)

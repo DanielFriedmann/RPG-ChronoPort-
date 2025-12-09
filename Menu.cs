@@ -10,7 +10,7 @@ namespace RPG
             do
             {
                 Console.WriteLine("=========================================");
-                Console.Write("------ "); ColorSwitch("Willkommen zu Chrono Port!", ConsoleColor.DarkYellow); Console.WriteLine("------");
+                Console.Write("------ "); ColorSwitch("Willkommen zu Chrono-Port!", ConsoleColor.DarkYellow); Console.WriteLine("------");
                 Console.WriteLine("=========================================");
                 Console.WriteLine("----- 1. Neues Spiel -----");
                 Console.WriteLine("----- 2. Spiel laden -----");
@@ -92,6 +92,7 @@ namespace RPG
 
         public static void Lore()
         {
+            Console.Clear();
             Console.WriteLine("Einst war die Welt im Gleichgewicht.");
             Console.WriteLine("Vergangenheit, Gegenwart und Zukunft flossen in geordneten Bahnen nebeneinander her.");
             Console.WriteLine("Doch dann… kam die Zersplitterung.");
@@ -115,6 +116,7 @@ namespace RPG
         }
         public static void TitleScreen()
         {
+            Console.Clear();
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("===================================");
             Console.WriteLine("-----------------------------------");
@@ -123,7 +125,7 @@ namespace RPG
             Console.WriteLine("===== Press any key to start ======");
             Console.WriteLine("===================================");
             Console.WriteLine("===================================");            
-            Console.ReadKey(); //evtll Titel Melodie
+            Console.ReadKey();                                          //evtll Titel Melodie
             Console.Clear();
         }
         public static void ColorSwitch(string text, ConsoleColor color)

@@ -47,13 +47,15 @@ namespace RPG
             int shopIndex = 0;
 
             List<(DungeonEvent, DungeonEvent)> plan = CreateDungeonPlanW2();
-            Console.WriteLine("Willkommen in Welt 2!");
+            Console.WriteLine($"Willkommen in Welt {world}!");
+            DungeonHelper.Pause();
 
             for (int round = 0; round < plan.Count; round++)
             {
                 var (left, right) = plan[round];
 
-                Console.WriteLine($"Runde {round + 1}");
+                Console.Clear();
+                Menu.ColorSwitch($"Runde {round + 1}\n", ConsoleColor.DarkGreen);
 
                 int leftIndex = round * 2;
                 int rightIndex = round * 2 + 1;
@@ -147,7 +149,7 @@ namespace RPG
                         Console.WriteLine("\\           /");
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
-                        Console.WriteLine("   \\_____/");                        
+                        Console.WriteLine("   \\_____/");
                         Console.WriteLine();
                         Console.ResetColor();
                         Console.WriteLine(shops[shopIndex].RoomName);

@@ -14,7 +14,7 @@ namespace RPG
             int lvl7 = 750;
             int lvl8 = 900; 
 
-            Console.WriteLine();           
+            Console.Clear();          
 
             if(player.Xp > lvl8 && player.Level < 8)
             {
@@ -179,6 +179,8 @@ namespace RPG
                     }
                     break;
             }
+
+            DungeonHelper.Pause();
             
         }
     }

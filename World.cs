@@ -2,13 +2,13 @@ namespace RPG
 {
 
     // Klasse für Räume -> Campfire, Shop und Monster
-    public class Room
+    public abstract class Room
     {
         public string RoomName { get; set; }
 
         public string Description { get; set; }
 
-        public Room(string roomname, string description)
+        protected Room(string roomname, string description)
         {
             RoomName = roomname;
             Description = description;

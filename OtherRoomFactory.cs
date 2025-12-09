@@ -304,9 +304,9 @@ namespace RPG
                     if (coins == 0)
                         DungeonHelper.AddDebuff(player, "Attack", 2, "Die Feuergeister sind beleidigt! Angriff gesunken.");
                     else if (coins <= 20)
-                        DungeonHelper.AddBuff(player, "Attack", 3, "Die Feuergeister sind zufrieden. Angriff leicht erhöht.");
+                        DungeonHelper.AddBuff(player, "Attack", 2, "Die Feuergeister sind zufrieden. Angriff leicht erhöht.");
                     else
-                        DungeonHelper.AddBuff(player, "Attack", 5, "Die Feuergeister sind beeindruckt! Angriff stark erhöht.");
+                        DungeonHelper.AddBuff(player, "Attack", 3, "Die Feuergeister sind beeindruckt! Angriff stark erhöht.");
 
                     player.Money -= coins;
                 }

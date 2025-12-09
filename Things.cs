@@ -1,7 +1,7 @@
 namespace RPG
 {
     //Klasse für Monster, Boss, Held und Gegenstände
-    public class Creature
+    public abstract class Creature
     {
         public string? Name { get; set; } 
 
@@ -15,7 +15,7 @@ namespace RPG
 
         public Creature() {}
 
-        public Creature(string name, int level, int attack, int defense, int health)
+        protected Creature(string name, int level, int attack, int defense, int health)
         {
             Name = name;
             Level = level;

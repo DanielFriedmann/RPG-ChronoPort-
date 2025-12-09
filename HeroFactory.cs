@@ -6,7 +6,8 @@ namespace RPG
         public static BasePlayer CreatePlayer()
         {
             string rasse;
-            bool taskDone = false;            
+            bool taskDone = false; 
+            Console.Clear();           
             string name = InputHelper.GetValidString("Wie lautet dein Name?");
             do
             {
@@ -74,7 +75,7 @@ namespace RPG
             {"Verstohlener Dolchstoß", new PlayerSpAtt("Verstohlener Dolchstoß", 15, 25, "stealth")},
             //Krieger
             {"Ansturm der 300 Krieger", new PlayerSpAtt("Ansturm der 300 Krieger", 40, 0, "focus")},
-            {"Genkidama", new PlayerSpAtt("Genkidama", 55, 50, "stunned")},
+            {"Genkidama", new PlayerSpAtt("Genkidama", 40, 10, "stunned")},
             //Magier
             {"Schwarze Magie", new PlayerSpAtt("Schwarze Magie", 30, 5, "focus")},
             {"Avatarstrahl", new PlayerSpAtt("Avatarstrahl", 42, 25, "")},
