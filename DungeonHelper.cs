@@ -238,7 +238,8 @@ namespace RPG
             CreditHelper("Sound und Animation");
             Console.WriteLine("==========================");
             Console.WriteLine("Drücke Enter um ins Hauptmenü zu kommen.");
-            Pause();           
+            Pause();
+            Console.Clear();           
 
         }
 
