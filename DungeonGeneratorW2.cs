@@ -72,9 +72,9 @@ namespace RPG
                         BattleSystem.Kampf(held, monsterRooms[leftIndex].Monster);
                     }
                     else if (left == DungeonEvent.Shop)
-                        DungeonHelper.ShopEvent(shops[shopIndex]);
+                        DungeonHelper.ShopEvent(shops[shopIndex++]);
                     else if (left == DungeonEvent.Campfire)
-                        DungeonHelper.CampfireEvent(campfires[campIndex], held, 14, campIndex);
+                        DungeonHelper.CampfireEvent(campfires[campIndex++], held, 14, campIndex);
                 }
                 else
                 {
@@ -84,9 +84,9 @@ namespace RPG
                         BattleSystem.Kampf(held, monsterRooms[rightIndex].Monster);
                     }
                     else if (right == DungeonEvent.Shop)
-                        DungeonHelper.ShopEvent(shops[shopIndex]);
+                        DungeonHelper.ShopEvent(shops[shopIndex++]);
                     else if (right == DungeonEvent.Campfire)
-                        DungeonHelper.CampfireEvent(campfires[campIndex], held, 14, campIndex);
+                        DungeonHelper.CampfireEvent(campfires[campIndex++], held, 14, campIndex);
                 }
 
             }
@@ -130,7 +130,7 @@ namespace RPG
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
                         Console.WriteLine("   \\_____/");
-                        Console.WriteLine(campfires[campIndex++].RoomName);
+                        Console.WriteLine(campfires[campIndex].RoomName);
                         Console.WriteLine();
                         Console.ResetColor();
                         break;
@@ -146,11 +146,10 @@ namespace RPG
                         Console.WriteLine("\\           /");
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
-                        Console.WriteLine("   \\_____/");
-                        Console.WriteLine(campfires[campIndex++].RoomName);
+                        Console.WriteLine("   \\_____/");                        
                         Console.WriteLine();
                         Console.ResetColor();
-                        Console.WriteLine(shops[shopIndex++].RoomName);
+                        Console.WriteLine(shops[shopIndex].RoomName);
                         break;
                 }
             }

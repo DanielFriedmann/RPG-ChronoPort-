@@ -61,9 +61,9 @@ namespace RPG
 
                 int leftIndex = round * 2;
                 int rightIndex = round * 2 + 1;
-                
+
                 PrintPortal(left, leftIndex);
-               
+
                 PrintPortal(right, rightIndex);
 
                 Console.WriteLine();
@@ -77,9 +77,9 @@ namespace RPG
                         BattleSystem.Kampf(held, monsterRooms[leftIndex].Monster);
                     }
                     else if (left == DungeonEvent.Shop)
-                        DungeonHelper.ShopEvent(shops[shopIndex]);
+                        DungeonHelper.ShopEvent(shops[shopIndex++]);
                     else if (left == DungeonEvent.Campfire)
-                        DungeonHelper.CampfireEvent(campfires[campIndex], held, 10, campIndex);
+                        DungeonHelper.CampfireEvent(campfires[campIndex++], held, 10, campIndex);
                 }
                 else
                 {
@@ -89,9 +89,9 @@ namespace RPG
                         BattleSystem.Kampf(held, monsterRooms[rightIndex].Monster);
                     }
                     else if (right == DungeonEvent.Shop)
-                        DungeonHelper.ShopEvent(shops[shopIndex]);
+                        DungeonHelper.ShopEvent(shops[shopIndex++]);
                     else if (right == DungeonEvent.Campfire)
-                        DungeonHelper.CampfireEvent(campfires[campIndex], held, 10, campIndex);
+                        DungeonHelper.CampfireEvent(campfires[campIndex++], held, 10, campIndex);
                 }
 
             }
@@ -124,7 +124,7 @@ namespace RPG
                         break;
 
                     case DungeonEvent.Campfire:
-                        
+
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("    _____     ");
                         Console.WriteLine("   /     \\");
@@ -135,14 +135,14 @@ namespace RPG
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
                         Console.WriteLine("   \\_____/");
-                        Console.WriteLine(campfires[campIndex++].RoomName);
+                        Console.WriteLine(campfires[campIndex].RoomName);
                         Console.WriteLine();
                         Console.ResetColor();
                         break;
 
                     case DungeonEvent.Shop:
 
-                       Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("    _____     ");
                         Console.WriteLine("   /     \\");
                         Console.WriteLine("  /       \\");
@@ -152,10 +152,9 @@ namespace RPG
                         Console.WriteLine(" \\         /");
                         Console.WriteLine("  \\       /");
                         Console.WriteLine("   \\_____/");
-                        Console.WriteLine(campfires[campIndex++].RoomName);
                         Console.WriteLine();
                         Console.ResetColor();
-                        Console.WriteLine(shops[shopIndex++].RoomName);
+                        Console.WriteLine(shops[shopIndex].RoomName);
                         break;
                 }
             }
