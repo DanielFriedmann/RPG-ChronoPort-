@@ -4,6 +4,7 @@ namespace RPG
 {
     public static class BossFactory
     {
+        // Klasse für Bosserstellung
         //Welt 1 Bosse
         public static BossMonster ChronoRex()
         {
@@ -116,6 +117,7 @@ namespace RPG
     }
     public static class MonsterFactory
     {
+        // Klasse für Monster Erstellung
         public static Monster Feuerkobold()
         {
             return new Monster(
@@ -450,6 +452,7 @@ namespace RPG
 
     public static class MonsterAttackLibrary
     {
+        // Klasse für Monsterattacken / Dictionary
         public static Dictionary<string, AttackMonster> MonsterAttacks = new()
             {
                 {"Raserei", new AttackMonster("Raserei", 25, 80)},
@@ -520,20 +523,20 @@ namespace RPG
                 {"Auto-Forge Cycle", new AttackMonster("Auto-Forge Cycle", 20, 82)},
                 {"Industrial Grasp", new AttackMonster("Industrial Grasp", 21, 80)},
 
-                {"Predictive Laser", new AttackMonster("Predictive Laser", 16, 92)},
+                {"Predictive Laser", new AttackMonster("Predictive Laser", 18, 92)},
                 {"Quantum Distortion", new AttackMonster("Quantum Distortion", 18, 88)},
-                {"Timeline Shield", new AttackMonster("Timeline Shield", 0, 100)}, // Defensive/Shield Attack
+                {"Timeline Shield", new AttackMonster("Timeline Shield", 16, 100)},
 
                 // Welt 3 Boss-Attacken
                 {"Hourfall Blaze", new AttackMonster("Hourfall Blaze", 25, 80)},
-                {"Era Shift", new AttackMonster("Era Shift", 0, 100)}, // Buff/Debuff Attack
+                {"Era Shift", new AttackMonster("Era Shift", 15, 100)}, 
                 {"Clockworld Crush", new AttackMonster("Clockworld Crush", 23, 75)},
 
                 {"Cycle Flare", new AttackMonster("Cycle Flare", 22, 78)},
-                {"Solstice Divide", new AttackMonster("Solstice Divide", 0, 100)}, // Debuff
+                {"Solstice Divide", new AttackMonster("Solstice Divide", 18, 100)},
                 {"Eclipse Wings", new AttackMonster("Eclipse Wings", 20, 82)},
 
-                {"Void Erasure", new AttackMonster("Void Erasure", 0, 100)}, // Debuff/Status Attack
+                {"Void Erasure", new AttackMonster("Void Erasure", 19, 100)},
                 {"Null Flare", new AttackMonster("Null Flare", 24, 75)},
                 {"Anti-Chron Pulse", new AttackMonster("Anti-Chron Pulse", 23, 78)},
             };
@@ -541,6 +544,7 @@ namespace RPG
 
     public static class MonsterDropsLibrary
     {
+        // Klasse für Monster/Boss Drops 
         public static Dictionary<string, MonsterDrop> MonsterDrops = new()
         {
             // Monster Drops
@@ -584,22 +588,21 @@ namespace RPG
             {"Pyrosprite", new MonsterDrop(40, "Flammenfunken", 20, 10)},
            
             // Bossdrops
-
-            {"Boss 1", new MonsterDrop(0, "Boss Item Welt 1", 100, 0)},
-            {"Boss 2", new MonsterDrop(0, "Boss Item Welt 2", 100, 0)},
-            {"Boss 3", new MonsterDrop(0, "Boss Item Welt 3", 100, 0)},
-            //Bosse Welt 1
-            {"Chrono-Rex", new MonsterDrop(180, "Zerschmetterter Zeitknochen", 100, 90)},
-            {"Rift-Mammut", new MonsterDrop(160, "Eiszeitkernsplitter", 100, 120)},
-            {"Primal-Hydra", new MonsterDrop(200, "Hydra-Zeitdrüse", 100, 140)},
-            //Bosse Welt 2
-            {"Motherboard-Matriarchin", new MonsterDrop(220, "Korruptes Nanitenpaket", 100, 110)},
-            {"Omega-Forge", new MonsterDrop(240, "Geschmiedeter Kernsplitter", 100, 150)},
-            {"Oracle-Unit Z3", new MonsterDrop(210, "Vorhersage-Linsenfragment", 100, 130)},
-            //Bosse Welt 3
-            {"Aethernox", new MonsterDrop(300, "Splitter der Endlosen Stunde", 100, 200)},
-            {"Solaryth", new MonsterDrop(280, "Glühender Sonnenrest", 100, 180)},
-            {"Nihilgron", new MonsterDrop(320, "Staub der Nichtzeit", 100, 220)},
+            {"Boss 1", new MonsterDrop(0, "Chronokern der Ersten Stunde", 100, 0)},
+            {"Boss 2", new MonsterDrop(0, "Splitter der Zerfallenen Zeitlinie", 100, 0)},
+            {"Boss 3", new MonsterDrop(0, "Auge des Äonenwächters", 100, 0)},
+            // Bosse Welt 1
+            {"Chrono-Rex", new MonsterDrop(75, "Zerschmetterter Zeitknochen", 100, 90)},
+            {"Rift-Mammut", new MonsterDrop(75, "Eiszeitkernsplitter", 100, 120)},
+            {"Primal-Hydra", new MonsterDrop(75, "Hydra-Zeitdrüse", 100, 140)},
+            // Bosse Welt 2
+            {"Motherboard-Matriarchin", new MonsterDrop(85, "Korruptes Nanitenpaket", 100, 110)},
+            {"Omega-Forge", new MonsterDrop(85, "Geschmiedeter Kernsplitter", 100, 150)},
+            {"Oracle-Unit Z3", new MonsterDrop(85, "Vorhersage-Linsenfragment", 100, 130)},
+            // Bosse Welt 3
+            {"Aethernox", new MonsterDrop(95, "Splitter der Endlosen Stunde", 100, 200)},
+            {"Solaryth", new MonsterDrop(95, "Glühender Sonnenrest", 100, 180)},
+            {"Nihilgron", new MonsterDrop(95, "Staub der Nichtzeit", 100, 220)},
 
         };
     }

@@ -2,6 +2,7 @@ namespace RPG
 {
     public class DungeonGenerator2
     {
+        //Klasse für Random Dungeon Generation Dungeon 2
         private static Random random = new Random();
 
         public enum DungeonEvent

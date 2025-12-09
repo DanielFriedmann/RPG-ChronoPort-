@@ -1,5 +1,6 @@
 namespace RPG
 {
+    //Klasse für Monster, Boss, Held und Gegenstände
     public class Creature
     {
         public string? Name { get; set; } 

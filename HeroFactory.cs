@@ -2,11 +2,11 @@ namespace RPG
 {
     public static class HeroFactory
     {
+        // Klasse für Heldenerstellung
         public static BasePlayer CreatePlayer()
         {
             string rasse;
-            bool taskDone = false;
-            Console.Clear();
+            bool taskDone = false;            
             string name = InputHelper.GetValidString("Wie lautet dein Name?");
             do
             {
@@ -59,9 +59,9 @@ namespace RPG
     {
         public static Dictionary<string, (int Health,int Level, int XP, int MaxHP, int Attack, int Defense,  int Crit, int SpecialPoints, int MaxSP, string HeroAbility)> raceStats= new()
         {
-            {"Krieger", (2000, 1, 0, 2000, 25, 10, 10, 3, 3, "")},
-            {"Magier", (2000, 1, 0 , 2000, 26, 10, 15, 5, 5, "")},
-            {"Schurke", (2000, 1, 0, 2000, 28, 8, 18, 5, 5, "Verstohlener Dolchstoß")}
+            {"Krieger", (250, 1, 0, 250, 25, 9, 7, 3, 3, "")},
+            {"Magier", (220, 1, 0 , 220, 26, 8, 9, 4, 4, "")},
+            {"Schurke", (215, 1, 0, 215, 28, 7, 11, 5, 5, "Verstohlener Dolchstoß")}
         };
     }
 

@@ -2,6 +2,8 @@ namespace RPG
 {
     public class MonsterRoomFactory
     {
+        // Klasse für Monsterraum erstellung inkl Jahr, Raumbeschreibung, Encountertexte
+        
         // Welt 1
         public static MonsterRoom A1()
         {

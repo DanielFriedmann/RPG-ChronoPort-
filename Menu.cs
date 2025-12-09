@@ -1,5 +1,6 @@
 namespace RPG
 {
+    //MENÜ KLASSE mit Methoden für Lore, Info und Title Screen
     public static class Menu
     {
 
@@ -8,7 +9,6 @@ namespace RPG
             bool taskDone = false;
             do
             {
-                Console.Clear();
                 Console.WriteLine("=========================================");
                 Console.Write("------ "); ColorSwitch("Willkommen zu Chrono Port!", ConsoleColor.DarkYellow); Console.WriteLine("------");
                 Console.WriteLine("=========================================");
@@ -122,8 +122,9 @@ namespace RPG
             Console.WriteLine("===================================");
             Console.WriteLine("===== Press any key to start ======");
             Console.WriteLine("===================================");
-            Console.WriteLine("===================================");
+            Console.WriteLine("===================================");            
             Console.ReadKey(); //evtll Titel Melodie
+            Console.Clear();
         }
         public static void ColorSwitch(string text, ConsoleColor color)
         {

@@ -1,5 +1,6 @@
 public static class InputHelper
 {
+    // Klasse für UserInputs
     public static string GetValidString(string question)
     {
         string input;

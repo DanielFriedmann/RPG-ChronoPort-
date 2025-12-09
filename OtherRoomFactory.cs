@@ -2,6 +2,7 @@ namespace RPG
 {
     public class Shopping
     {
+        // Klasse zur Shoperstellung. Inkl Beschreibung und String der Items
         public static Shop CreateShopW1A()
         {
             return new Shop("Händler der fernen Oase",
@@ -74,6 +75,7 @@ namespace RPG
 
     public static class Camping
     {
+        // Klasse zur Campfire Erstellung. Inkl Beschreibung, Liste NPCS und Methoden
         public static Random random = new Random();
 
         public static List<string> randosW1u = new List<string>{

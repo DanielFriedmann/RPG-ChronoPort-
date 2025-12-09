@@ -1,5 +1,7 @@
 namespace RPG
 {
+
+    // Klasse für Räume -> Campfire, Shop und Monster
     public class Room
     {
         public string RoomName { get; set; }

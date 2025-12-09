@@ -2,16 +2,19 @@ namespace RPG
 {
     public static class Level
     {
+        // Klasse für das Levelsystem mit Subclasses
         public static void LvlUpCheck(BasePlayer player)
         {
             
             int lvl2 = 50;
-            int lvl3 = 100;
+            int lvl3 = 150;
             int lvl4 = 300;
-            int lvl5 = 500;
-            int lvl6 = 700;
-            int lvl7 = 900;
-            int lvl8 = 1200;            
+            int lvl5 = 450;
+            int lvl6 = 600;
+            int lvl7 = 750;
+            int lvl8 = 900; 
+
+            Console.WriteLine();           
 
             if(player.Xp > lvl8 && player.Level < 8)
             {
@@ -56,19 +59,19 @@ namespace RPG
                 Console.WriteLine($"Herzlichen Glückwunsch! Du hast Level {player.Level} erreicht!");
                 LvlUpScreen(player);
             } 
-
-            DungeonHelper.Pause();        
+                    
         }
 
 
         public static void ChooseSub(BasePlayer player)
         {
+            DungeonHelper.Pause();
             Console.WriteLine("Glückwunsch! Du hast eine Subklasse freigeschaltet!");
             Console.WriteLine("==================================================================================");
             if (player.Race == "Krieger")
             {
                 Console.WriteLine("1. Sayajin. Gibt dir eine Fähigkeit die nur wahre Sayajin entfesseln können");
-                Console.WriteLine("2. Titan. Werde zum Fels in der Brandung für alle die dir wichtig sind.");
+                Console.WriteLine("2. Titan. Werde zum Fels in der Brandung für alle, die dir wichtig sind.");
                 int choice = InputHelper.GetInt("Wähle eine Option", 2);
                 if (choice == 1)
                 {
@@ -122,9 +125,9 @@ namespace RPG
             }            
         }
 
-        public static void LvlUpScreen(BasePlayer player)
-        {
-            Console.Clear();
+        public static void LvlUpScreen(BasePlayer player)        {
+            
+            DungeonHelper.Pause();
             Console.WriteLine("Du hast einen Skillpunkt erhalten!");
             Console.WriteLine("---------------------------------------------------------------");
             Console.WriteLine($"1. Attack: {player.Attack}");
@@ -142,8 +145,8 @@ namespace RPG
                     break;
 
                 case 2:
-                    player.Defense += 2;
-                    Console.WriteLine($"Verteidigung wurde erhöht. {player.Defense - 2} => {player.Defense}");
+                    player.Defense += 1;
+                    Console.WriteLine($"Verteidigung wurde erhöht. {player.Defense - 1} => {player.Defense}");
                     break;
 
                 case 3:

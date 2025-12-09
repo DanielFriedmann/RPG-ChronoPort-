@@ -1,42 +1,62 @@
 [
   {
-    "Crit": 15,
+    "Crit": 10,
     "SpecialPoints": 2,
-    "Xp": 1315,
-    "MaxHP": 2000,
-    "MaxSP": 6,
+    "Xp": 875,
+    "MaxHP": 250,
+    "MaxSP": 4,
     "HeroAbility": "Genkidama",
     "Status": "",
-    "Money": 590,
+    "Money": 617,
     "Race": "Sayajin",
     "Inventory": {
       "ItemsInventory": []
     },
     "Progress": 4,
-    "Name": "Daniel the dude",
+    "Name": "Raegar der Tyrann",
     "Level": 8,
-    "Attack": 33,
+    "Attack": 37,
     "Defense": 10,
-    "Health": 1871
+    "Health": 72
   },
   {
-    "Crit": 10,
-    "SpecialPoints": 1,
-    "Xp": 1215,
-    "MaxHP": 2000,
-    "MaxSP": 3,
-    "HeroAbility": "Ansturm der 300 Krieger",
+    "Crit": 20,
+    "SpecialPoints": 0,
+    "Xp": 925,
+    "MaxHP": 220,
+    "MaxSP": 4,
+    "HeroAbility": "Schwarze Magie",
     "Status": "",
-    "Money": 621,
-    "Race": "Titan",
+    "Money": 615,
+    "Race": "Dunkler Magier",
     "Inventory": {
       "ItemsInventory": []
     },
     "Progress": 4,
-    "Name": "Daniel",
+    "Name": "Harry Potter",
     "Level": 8,
-    "Attack": 39,
-    "Defense": 14,
-    "Health": 1888
+    "Attack": 30,
+    "Defense": 12,
+    "Health": 79
+  },
+  {
+    "Crit": 23,
+    "SpecialPoints": 1,
+    "Xp": 660,
+    "MaxHP": 215,
+    "MaxSP": 6,
+    "HeroAbility": "Sprung der Assassinen",
+    "Status": "",
+    "Money": 511,
+    "Race": "Assassine",
+    "Inventory": {
+      "ItemsInventory": []
+    },
+    "Progress": 4,
+    "Name": "Valeera, die Abtr\u00FCnnige",
+    "Level": 6,
+    "Attack": 32,
+    "Defense": 9,
+    "Health": 91
   }
 ]

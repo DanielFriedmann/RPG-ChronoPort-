@@ -7,6 +7,7 @@ namespace RPG
 {
     public class DungeonHelper
     {
+        //Klasse für Methoden von Dungeon 1 bis 3
         public static List<BasePlayer> hoflist { get; set; } = new List<BasePlayer>();
 
         public static void EncounterMonster(MonsterRoom room)
@@ -31,7 +32,7 @@ namespace RPG
                 Console.WriteLine($"{monster.Name} hat Loot gedroppt!");
                 Console.WriteLine($"Du erhältst {monster.Drop.DropItem}!");
             }
-
+            Pause();
             Level.LvlUpCheck(player);
         }
 
@@ -47,6 +48,7 @@ namespace RPG
             Console.WriteLine($"Du erhältst {monster.Drop1.DropItem} und hast damit {world} von 3 Artefakten um die Welt wieder ins Lot zu bringen!");
             Console.WriteLine($"Du erhältst {monster.Drop2.DropItem}!");
             player.Progress = world + 1;   //Alternative zu World Artefakten um den Progress zu überprüfen.
+            Pause();
             Level.LvlUpCheck(player);
         }
 
@@ -58,7 +60,6 @@ namespace RPG
                 Console.Write($"{item}: {price} $");
             }
             Pause();
-            Console.Clear();
         }
 
         public static void CampfireEvent(Campfire campfire, BasePlayer player, int value, int campindex)
@@ -77,19 +78,22 @@ namespace RPG
                 player.Health = player.MaxHP;
             }
             Console.WriteLine($"Du hast dich um {value} HP geheilt. Neue HP:{player.Health} ");
+            Pause();
 
             List<string> npcList = campfire.Encounter;
             npcList = npcList.OrderBy(x => random.Next()).ToList();
             NPC npc = NPCLibrary.NPCs[npcList[campindex]]();
 
             Console.WriteLine($"Plötzlich taucht {npc.Name} auf!");
+            Pause();
             Console.WriteLine(npc.WelcomeText);
+            Pause();
             npc.Encounter(player);
+            Pause();
             Console.WriteLine(npc.ByeText);
 
             Console.WriteLine("Du packst deine Sachen und machst dich wieder auf den Weg.");
             Pause();
-            Console.Clear();
 
         }
 
@@ -200,9 +204,21 @@ namespace RPG
 
         public static void EndLore()
         {
-            Console.WriteLine("Du bringst alle 3 Artefakte zum Chrono Portal");
-            Console.WriteLine("Die Artefakte vibrieren.....");
-            //Restliche Lore
+            Console.WriteLine("Du bringst alle 3 Artefakte zum Chrono Portal.");
+            Console.WriteLine("Die Artefakte beginnen heftig zu vibrieren...");
+            Console.WriteLine("Die zersplitterten Zeitlinien reagieren auf ihre Macht.");
+            Pause();
+
+            Console.WriteLine("Portale kollabieren, Welten verschmelzen wieder.");
+            Console.WriteLine("Die chaotischen Echos der Zeit werden langsam still.");
+            Console.WriteLine("Das Chrono Portal entfesselt seine wahre Kraft.");
+            Pause();
+
+            Console.WriteLine("Ein grelles Licht durchflutet alle Dimensionen.");
+            Console.WriteLine("Die Welt findet zurück in ihre ursprüngliche Ordnung.");
+            Console.WriteLine("Du hast das Gleichgewicht der Zeit wiederhergestellt.");
+            Pause();
+
         }
 
         public static void Credits()
@@ -215,7 +231,7 @@ namespace RPG
             CreditHelper("Sound und Animation");
             Console.WriteLine("==========================");
             Console.WriteLine("Drücke Enter um ins Hauptmenü zu kommen.");
-            //Hautpmenü aufruf
+            Pause();           
 
         }
 
@@ -229,7 +245,6 @@ namespace RPG
         public static void FinalScreen(BasePlayer player)
         {
             EndLore();
-            Console.Clear();
             Console.WriteLine("Herzlichen Glückwunsch! Du hast das Spiel beendet!");
             Console.WriteLine("====================================================");
             Console.WriteLine($"Spieler: {player.Name}");
@@ -249,7 +264,6 @@ namespace RPG
             DeleteSave();               //monster counter
             Console.WriteLine("Drücken Sie Enter um fortzufahren.");
             Console.ReadLine();
-            Console.Clear();
             Credits();
         }
 
@@ -265,7 +279,7 @@ namespace RPG
 
         public static void DeleteSave()
         {
-            if(File.Exists("savegame.json"))
+            if (File.Exists("savegame.json"))
             {
                 File.Delete("savegame.json");
                 Console.WriteLine("Save File wurde zurückgesetzt.");
@@ -284,7 +298,7 @@ namespace RPG
             string json = File.ReadAllText("savegame.json");
             BasePlayer? player = JsonSerializer.Deserialize<BasePlayer>(json);
 
-            if(player == null)
+            if (player == null)
             {
                 Console.WriteLine("Fehler, es wurde kein Spieler gefunden.");
                 Pause();
@@ -296,7 +310,7 @@ namespace RPG
 
         public static void HallofFameLoad()
         {
-            if(File.Exists("hof.json"))
+            if (File.Exists("hof.json"))
             {
                 string json = File.ReadAllText("hof.json");
                 hoflist = JsonSerializer.Deserialize<List<BasePlayer>>(json) ?? new List<BasePlayer>();
@@ -315,9 +329,9 @@ namespace RPG
             hoflist.Add(player);
         }
 
-        public static void HofSave(List<BasePlayer >hoflist)
+        public static void HofSave(List<BasePlayer> hoflist)
         {
-             string json = JsonSerializer.Serialize(hoflist, new JsonSerializerOptions
+            string json = JsonSerializer.Serialize(hoflist, new JsonSerializerOptions
             {
                 WriteIndented = true
             });
@@ -327,26 +341,26 @@ namespace RPG
 
         public static void HofShow()
         {
-               for (int i = 0; i < hoflist.Count; i++)
-                    {
-                        BasePlayer player = hoflist[i];
-                        Console.WriteLine($"================ {i + 1}. =============================");
-                        Console.WriteLine($"Spieler: {player.Name}");
-                        Console.WriteLine($"Rasse: {player.Race}");
-                        Console.WriteLine($"Ability: {player.HeroAbility}");
-                        Console.WriteLine($"===================================================");
-                        Console.WriteLine($"Health: {player.Health}/{player.MaxHP} HP");
-                        Console.WriteLine($"Attack: {player.Attack}");
-                        Console.WriteLine($"Defense: {player.Defense}");
-                        Console.WriteLine($"Crit: {player.Crit}%");
-                        Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP} SP");
-                        Console.WriteLine("=====================================================");
-                        Console.WriteLine($"================= {i+1}/{hoflist.Count} ==================");
-                        Console.WriteLine("======== Fortfahren mit beliebiger Taste... ");
-                        Pause();
-                    }
+            for (int i = 0; i < hoflist.Count; i++)
+            {
+                BasePlayer player = hoflist[i];
+                Console.WriteLine($"================ {i + 1}. =============================");
+                Console.WriteLine($"Spieler: {player.Name}");
+                Console.WriteLine($"Rasse: {player.Race}");
+                Console.WriteLine($"Ability: {player.HeroAbility}");
+                Console.WriteLine($"===================================================");
+                Console.WriteLine($"Health: {player.Health}/{player.MaxHP} HP");
+                Console.WriteLine($"Attack: {player.Attack}");
+                Console.WriteLine($"Defense: {player.Defense}");
+                Console.WriteLine($"Crit: {player.Crit}%");
+                Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP} SP");
+                Console.WriteLine("=====================================================");
+                Console.WriteLine($"================= {i + 1}/{hoflist.Count} ==================");
+                Console.WriteLine("======== Fortfahren mit beliebiger Taste... ");
+                Pause();
+            }
         }
-               
+
         public static void Pause()
         {
             Console.WriteLine(" ▼ Weiter ▼ ");
@@ -360,7 +374,6 @@ namespace RPG
 
         public static void GameOverScreen(BasePlayer player)
         {
-            Console.Clear();
             Console.WriteLine("======================================");
             Console.WriteLine("======================================");
             Console.WriteLine($"======== {player.Name} ist gefallen =========");
@@ -370,10 +383,10 @@ namespace RPG
             Console.WriteLine("======================================");
             Pause();
             Console.WriteLine("Die Welt und auch dieses Spiel wurden zerstört.");
-            Console.WriteLine("In fernen Äonen wird womöglich jemend erneut geboren.");
+            Console.WriteLine("In fernen Äonen wird womöglich jemand erneut geboren.");
             Pause();
             Environment.Exit(0);
         }
-        
+
     }
 }

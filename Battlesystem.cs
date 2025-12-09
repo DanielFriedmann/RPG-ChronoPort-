@@ -1,5 +1,6 @@
 namespace RPG
 {
+    //Klasse für Kämpfe mit Monstern
     public static class BattleSystem
     {
 
@@ -80,8 +81,9 @@ namespace RPG
             string hpBar = new string('|', currentHPBlocks) + new string(' ', emptyBlocks);
 
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine(monster.Name);
+            Console.Write(monster.Name);
             Console.ResetColor();
+            Console.WriteLine($"    LVL: {monster.Level}");
             Console.Write("[");
             Menu.ColorSwitch(hpBar, ConsoleColor.Red);
             Console.WriteLine($"] {monster.Health}/{monster.MaxHP} HP");
@@ -95,8 +97,9 @@ namespace RPG
             string hpBar = new string('|', currentHPBlocks) + new string(' ', emptyBlocks);
 
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine(monster.Name);
+            Console.Write(monster.Name);
             Console.ResetColor();
+            Console.WriteLine($"LVL:    {monster.Level}");
             Console.Write("[");
             Menu.ColorSwitch(hpBar, ConsoleColor.Red);
             Console.WriteLine($"] {monster.Health}/{monster.MaxHP} HP");
@@ -111,12 +114,13 @@ namespace RPG
             string hpBar = new string('|', currentHPBlocks) + new string(' ', emptyBlocks);
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(player.Name);
+            Console.Write(player.Name);
             Console.ResetColor();
+            Console.WriteLine($"  Status: {player.Status}");
             Console.Write("[");
             Menu.ColorSwitch(hpBar, ConsoleColor.Red);
             Console.WriteLine($"] {player.Health}/{player.MaxHP} HP");
-            Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP}");
+            Console.WriteLine($"Specialpoints: {player.SpecialPoints}/{player.MaxSP} LVL:{player.Level}");
         }
         public static void PlayerTurn(BasePlayer player, Monster monster)
         {
@@ -351,6 +355,7 @@ namespace RPG
 
     public static class BossBattle
     {
+        //Klasse für Kämpfe mit Bossen
         public static void BossKampf(BasePlayer player, BossMonster monster, int world)
         {
             Console.WriteLine("\nDu stehst vor einem großen Portal... Du gehst hindurch...");
