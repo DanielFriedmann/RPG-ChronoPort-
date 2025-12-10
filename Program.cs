@@ -7,8 +7,6 @@
             Program p1 = new Program();
             Menu.TitleScreen();            
             Menu.ShowMenu();
-        }
-
-        
+        }        
     }
 }

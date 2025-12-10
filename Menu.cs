@@ -82,8 +82,7 @@ namespace RPG
             Console.WriteLine("============================= INFO ========================================");
             Console.WriteLine(" ▼ <= Das ist das WeiterSymbol. Drücke beliebige Taste um Weiterzumachen.");
             DungeonHelper.Pause();
-            Console.WriteLine("Wunderbar, das funktioniert ja schonmal!");
-            Console.WriteLine("Möchtest du die Lore erneut lesen? y/n");
+            Console.WriteLine("Wunderbar, das funktioniert ja schonmal!");            
             if (InputHelper.AskYesNo("Möchtest du die Lore erneut lesen?"))
             {
                 Lore();

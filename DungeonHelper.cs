@@ -353,6 +353,7 @@ namespace RPG
             for (int i = 0; i < hoflist.Count; i++)
             {
                 BasePlayer player = hoflist[i];
+                Console.Clear();
                 Console.WriteLine($"================ {i + 1}. =============================");
                 Console.WriteLine($"Spieler: {player.Name}");
                 Console.WriteLine($"Rasse: {player.Race}");
@@ -368,6 +369,7 @@ namespace RPG
                 Console.WriteLine("======== Fortfahren mit beliebiger Taste... ");
                 Pause();
             }
+            Console.Clear();
         }
 
         public static void Pause()
